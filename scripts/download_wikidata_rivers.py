@@ -30,7 +30,7 @@ print ("length of rivers", len(rivers))
 with open("wikidata_rivers.json", "w") as file:
     file.write(json.dumps(rivers))
 
-csv = "ID,Name,Length\n"
+csv = "Name,ID,Length\n"
 for key, value in rivers.items():
     csv += f"{value[0].replace(',', ';')},{key.replace(',', ';')},{value[1]}\n"
 
