@@ -60,7 +60,7 @@ class HydroMatch():
         for match in matches:
             if re.search("^[\sA-Z]+$", match[0]) or re.search("^[\sa-z]+$", match[0]):
                 continue
-            final_matches.append(m)
+            final_matches.append(match)
             for m in re.finditer(match[0], text):
                 entities[0]["ents"].append({
                     "start": m.start(), "end": m.end(), "label": match[1], "title": None
