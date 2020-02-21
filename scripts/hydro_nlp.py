@@ -2,6 +2,7 @@ import spacy
 from spacy.matcher import PhraseMatcher
 from spacy.tokens import Doc, Span, Token
 
+from typing import Dict, List, Tuple
 import pickle
 import re
 from tqdm import tqdm
