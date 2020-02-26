@@ -23,14 +23,15 @@ class HydroMatch():
         self.nlp = spacy.load("en_core_web_sm")
         self.vocab = {}
         self.wikidata = {}
+        self.stop_words = set()
         try:
             with open(matcher_file, "rb") as file:
-                self.vocab, self.matcher, self.wikidata = pickle.load(file)
+                self.vocab, self.matcher, self.wikidata, self.stop_words = pickle.load(file)
             print (f"Loaded water bodies from {matcher_file}")
         except Exception as e:
             print (str(e))
             print (f"Failed to load water bodies from {matcher_file}")
-        Span.set_extension("wikilink", default = None)
+        Span.set_extension("wikilink", default = None, force = True)
     
     def load_vocab(self, water_bodies: Dict, append: bool = True):
         """Load new vocab and wikidata.
@@ -73,7 +74,7 @@ class HydroMatch():
         """
         try:
             with open(filename, "wb") as file:
-                pickle.dump((self.vocab, self.matcher, self.wikidata), file)
+                pickle.dump((self.vocab, self.matcher, self.wikidata, self.stop_words), file)
             print (f"Vocab stored in {filename}")
         except Exception as e:
             print (str(e))
@@ -117,6 +118,8 @@ class HydroMatch():
                 displacy.render(doc, style="ent", jupyter=True)
             Get list of extra attributes for each entity/match:
                  [ent._.wikilink for ent in doc.ents]
+        all_matches: List
+            List of all matches including the ones filtered out in the final matches.
         """
         if self.matcher is None:
             raise AttributeError("Model is not set.")
@@ -128,7 +131,10 @@ class HydroMatch():
         entities = []
         final_matches = []
         for match in matches:
-            if re.search("^[\sA-Z]+$", match[0]) or re.search("^[\sa-z]+$", match[0]):
+            if match[0].lower() in self.stop_words:
+                if str(doc[match[3]:match[3]+1]).lower() not in ["river", "lake"]:
+                    continue
+            elif re.search("^[\sA-Z]+$", match[0]) or re.search("^[\sa-z]+$", match[0]):
                 continue
             final_matches.append(match)
             entity = Span(doc, match[2], match[3], label=match[1])
@@ -139,4 +145,4 @@ class HydroMatch():
                 )
             entities.append(entity)
         doc.ents = entities
-        return final_matches, doc
+        return final_matches, doc, matches
