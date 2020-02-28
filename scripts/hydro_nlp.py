@@ -6,6 +6,7 @@ from typing import Dict, List, Tuple
 import pickle
 import re
 from tqdm import tqdm
+import pandas as pd
 
 class HydroMatch():
     """Class for NLP related to Hydrology"""
@@ -33,6 +34,40 @@ class HydroMatch():
             print (f"Failed to load water bodies from {matcher_file}")
         Span.set_extension("wikilink", default = None, force = True)
     
+    def load_vocab_csvs(self, river_csv: str, lake_csv: str, append: bool = True):
+        """Load rivers and lakes data from csv files
+        
+        Parameters
+        ----------
+        river_csv : str
+            Path to the file with river data
+        lake_csv : str
+            Path to the file with lake data
+        append : bool, optional
+            If True then the new data is appended on top of the previous data.
+            Otherwise old data is done away with.
+        """
+        water_bodies = {"LAKE": [], "RIVER": []}
+        try:
+            dfr = pd.read_csv(river_csv)
+            for i in range(len(dfr)):
+                if not re.search("^Q[0-9]+", dfr["Name"][i]):
+                    water_bodies["RIVER"].append((dfr["Name"][i].lower(), dfr["ID"][i]))
+        except Exception as e:
+            print (f"Couldn't load {river_csv} file")
+            print (str(e))
+        
+        try:
+            dfl = pd.read_csv(lake_csv)
+            for i in range(len(dfl)):
+                if not re.search("^Q[0-9]+", dfl["Name"][i]):
+                    water_bodies["LAKE"].append((dfl["Name"][i].lower(), dfl["ID"][i]))
+        except Exception as e:
+            print (f"Couldn't load {lake_csv} file")
+            print (str(e))
+        
+        self.load_vocab(water_bodies, append = append)
+    
     def load_vocab(self, water_bodies: Dict, append: bool = True):
         """Load new vocab and wikidata.
         
@@ -55,7 +90,7 @@ class HydroMatch():
             self.vocab = {}
             self.wikidata = {}
         for key in water_bodies:
-            print (f"Loading {key}")
+            print (f"Loading {key}(s)")
             phrases = [self.nlp(wb) for wb, _ in tqdm(water_bodies[key])]
             self.vocab[key] = self.nlp.vocab.strings[key]
             self.matcher.add(key.upper(), None, *phrases)
@@ -63,6 +98,7 @@ class HydroMatch():
                 self.wikidata[key] = {}
             for name, id in water_bodies[key]:
                 self.wikidata[key][name.lower()] = id
+            print (f"{len(phrases)} {key}(s) added.")
     
     def save_vocab(self, filename = "hydro_matcher.pkl"):
         """Save vocab and wikidata to file.

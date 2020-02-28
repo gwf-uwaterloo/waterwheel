@@ -4,11 +4,11 @@ import json
 
 url = 'https://query.wikidata.org/sparql'
 subquery = """
-SELECT ?item ?itemLabel ?area
+SELECT ?item ?itemLabel
 WHERE 
 {
   ?item wdt:P31 wd:Q23397.
-  ?item wdt:P2046 ?area
+  ?article schema:about ?item.
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
   FILTER (CONTAINS(STR(?item), 
 """
@@ -21,7 +21,7 @@ for comb in tqdm(combinations):
         data = r.json()
         for entry in data["results"]["bindings"]:
             key = entry["item"]["value"].split("/")[-1]
-            lakes[key] = (entry['itemLabel']['value'], entry['area']['value'])
+            lakes[key] = entry['itemLabel']['value']
     except Exception as e:
         print (str(e))
         print (comb)
@@ -34,9 +34,9 @@ except Exception as e:
     print (str(e))
 
 try:
-    csv = "Name,ID,Area\n"
+    csv = "Name,ID\n"
     for key, value in lakes.items():
-        csv += f"{value[0].replace(',', ';')},{key.replace(',', ';')},{value[1]}\n"
+        csv += f"{value.replace(',', ';')},{key.replace(',', ';')}\n"
 
     with open("wikidata_lakes.csv", "w") as file:
         file.write(csv.encode('ascii', 'ignore').decode())
