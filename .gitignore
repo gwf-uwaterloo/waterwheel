@@ -6,7 +6,7 @@ _static/
 _templates/
 __pycache__
 .ipynb_checkpoints/
-.ipynb
+*.ipynb
 *.pyc
 /dist/
 /*.egg-info
