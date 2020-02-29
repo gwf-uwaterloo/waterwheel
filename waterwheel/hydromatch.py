@@ -37,37 +37,38 @@ class HydroMatch():
 
         Span.set_extension('wikilink', default=None, force=True)
 
-    def load_vocab_csvs(self, river_csv: Path, lake_csv: Path, append: bool = True):
-        """Load rivers and lakes data from csv files.
+    def load_vocab_csvs(self, data_dir: Path = Path('../data'), append: bool = True):
+        """Load data from csv files.
         
         Parameters
         ----------
-        river_csv : Path
-            Path to the file with river data
-        lake_csv : Path
-            Path to the file with lake data
+        data_dir : Path, optional
+            Path to the directory with csv files.
+            Format:
+                Each csv file should contain columns Name and ID
+                Filename should be wikidata_{water_body_type}s.csv
+                For example wikidata_rivers.csv
         append : bool, optional
             If True then the new data is appended on top of the previous data.
             Otherwise old data is done away with.
         """
-
-        water_bodies = {'LAKE': [], 'RIVER': []}
-        try:
-            dfr = pd.read_csv(river_csv)
-            for i in range(len(dfr)):
-                if not re.search('^Q[0-9]+', dfr['Name'][i]):
-                    water_bodies['RIVER'].append((dfr['Name'][i].lower(), dfr['ID'][i]))
-        except Exception as e:
-            raise RuntimeError(f'Could not load {river_csv}.\nError: {str(e)}')
-
-        try:
-            dfl = pd.read_csv(lake_csv)
-            for i in range(len(dfl)):
-                if not re.search('^Q[0-9]+', dfl['Name'][i]):
-                    water_bodies['LAKE'].append((dfl['Name'][i].lower(), dfl['ID'][i]))
-        except Exception as e:
-            raise RuntimeError(f'Could not load {river_csv}.\nError: {str(e)}')
-
+        
+        water_bodies = {}
+        
+        files = data_dir.glob('wikidata_*s.csv')
+        files = [str(f) for f in files]
+        
+        for file in files:
+            try:
+                wb_type = file.split('wikidata_')[1].split('s.csv')[0].upper()
+                water_bodies[wb_type] = []
+                df = pd.read_csv(file)
+                for i in range(len(df)):
+                    if type(df['Name'][i]) is str and (not re.search('^Q[0-9]+', df['Name'][i])):
+                        water_bodies[wb_type].append((df['Name'][i].lower(), df['ID'][i]))
+            except Exception as e:
+                raise RuntimeError(f'Could not load {file}.\nError: {str(e)}')
+        
         self.load_vocab(water_bodies, append=append)
 
     def load_vocab(self, water_bodies: Dict, append: bool = True):
@@ -93,7 +94,7 @@ class HydroMatch():
             self.vocab = {}
             self.wikidata = {}
         for key in water_bodies:
-            phrases = [self.nlp(wb) for wb, _ in tqdm(water_bodies[key])]
+            phrases = [self.nlp(wb) for wb, _ in tqdm(water_bodies[key], desc=f'Loading {key}(s)')]
             self.vocab[key] = self.nlp.vocab.strings[key]
             self.matcher.add(key.upper(), None, *phrases)
             if key not in self.wikidata:
