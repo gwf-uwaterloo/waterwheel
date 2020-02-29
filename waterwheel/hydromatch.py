@@ -1,73 +1,75 @@
+import re
+import pickle
+import pandas as pd
+from tqdm import tqdm
+from pathlib import Path
+from typing import Dict, List
+
 import spacy
 from spacy.matcher import PhraseMatcher
-from spacy.tokens import Doc, Span, Token
+from spacy.tokens import Doc, Span
 
-from typing import Dict, List, Tuple
-import pickle
-import re
-from tqdm import tqdm
-import pandas as pd
 
 class HydroMatch():
-    """Class for NLP related to Hydrology"""
-    def __init__(self, matcher_file: str = "hydro_matcher.pkl"):
+    """Class for finding hydrologic entities in text"""
+
+    def __init__(self, matcher_file: Path = Path('resources/hydromatch.pkl')):
         """Initialize the class.
         
         Parameters
         ----------
-        matcher_file : str, optional
+        matcher_file : Path, optional
             File path to load the vocab and wikidata.
             File created using HydroMatch::save_vocab method should be used for this.
         """
-        
+
         self.matcher = None
-        self.nlp = spacy.load("en_core_web_sm")
+        self.nlp = spacy.load('en_core_web_sm')
         self.vocab = {}
         self.wikidata = {}
         self.stop_words = set()
+
         try:
-            with open(matcher_file, "rb") as file:
+            with open(matcher_file, 'rb') as file:
                 self.vocab, self.matcher, self.wikidata, self.stop_words = pickle.load(file)
-            print (f"Loaded water bodies from {matcher_file}")
         except Exception as e:
-            print (str(e))
-            print (f"Failed to load water bodies from {matcher_file}")
-        Span.set_extension("wikilink", default = None, force = True)
-    
-    def load_vocab_csvs(self, river_csv: str, lake_csv: str, append: bool = True):
-        """Load rivers and lakes data from csv files
+            raise RuntimeError(f'Failed to load water bodies from {matcher_file}.\nError: {str(e)}')
+
+        Span.set_extension('wikilink', default=None, force=True)
+
+    def load_vocab_csvs(self, river_csv: Path, lake_csv: Path, append: bool = True):
+        """Load rivers and lakes data from csv files.
         
         Parameters
         ----------
-        river_csv : str
+        river_csv : Path
             Path to the file with river data
-        lake_csv : str
+        lake_csv : Path
             Path to the file with lake data
         append : bool, optional
             If True then the new data is appended on top of the previous data.
             Otherwise old data is done away with.
         """
-        water_bodies = {"LAKE": [], "RIVER": []}
+
+        water_bodies = {'LAKE': [], 'RIVER': []}
         try:
             dfr = pd.read_csv(river_csv)
             for i in range(len(dfr)):
-                if not re.search("^Q[0-9]+", dfr["Name"][i]):
-                    water_bodies["RIVER"].append((dfr["Name"][i].lower(), dfr["ID"][i]))
+                if not re.search('^Q[0-9]+', dfr['Name'][i]):
+                    water_bodies['RIVER'].append((dfr['Name'][i].lower(), dfr['ID'][i]))
         except Exception as e:
-            print (f"Couldn't load {river_csv} file")
-            print (str(e))
-        
+            raise RuntimeError(f'Could not load {river_csv}.\nError: {str(e)}')
+
         try:
             dfl = pd.read_csv(lake_csv)
             for i in range(len(dfl)):
-                if not re.search("^Q[0-9]+", dfl["Name"][i]):
-                    water_bodies["LAKE"].append((dfl["Name"][i].lower(), dfl["ID"][i]))
+                if not re.search('^Q[0-9]+', dfl['Name'][i]):
+                    water_bodies['LAKE'].append((dfl['Name'][i].lower(), dfl['ID'][i]))
         except Exception as e:
-            print (f"Couldn't load {lake_csv} file")
-            print (str(e))
-        
-        self.load_vocab(water_bodies, append = append)
-    
+            raise RuntimeError(f'Could not load {river_csv}.\nError: {str(e)}')
+
+        self.load_vocab(water_bodies, append=append)
+
     def load_vocab(self, water_bodies: Dict, append: bool = True):
         """Load new vocab and wikidata.
         
@@ -85,12 +87,12 @@ class HydroMatch():
             If True then the new data is appended on top of the previous data.
             Otherwise old data is done away with.
         """
-        if append == False or self.matcher is None:
-            self.matcher = PhraseMatcher(self.nlp.vocab, attr = 'LOWER')
+
+        if append is False or self.matcher is None:
+            self.matcher = PhraseMatcher(self.nlp.vocab, attr='LOWER')
             self.vocab = {}
             self.wikidata = {}
         for key in water_bodies:
-            print (f"Loading {key}(s)")
             phrases = [self.nlp(wb) for wb, _ in tqdm(water_bodies[key])]
             self.vocab[key] = self.nlp.vocab.strings[key]
             self.matcher.add(key.upper(), None, *phrases)
@@ -98,24 +100,22 @@ class HydroMatch():
                 self.wikidata[key] = {}
             for name, id in water_bodies[key]:
                 self.wikidata[key][name.lower()] = id
-            print (f"{len(phrases)} {key}(s) added.")
-    
-    def save_vocab(self, filename = "hydro_matcher.pkl"):
+
+    def save_vocab(self, filename = Path('resources/hydromatch.pkl')):
         """Save vocab and wikidata to file.
         
         Parameters
         ----------
-        filename : str, optional
+        filename : Path, optional
             Path to file to save the vocab and wikidata to.
         """
+
         try:
-            with open(filename, "wb") as file:
+            with open(filename, 'wb') as file:
                 pickle.dump((self.vocab, self.matcher, self.wikidata, self.stop_words), file)
-            print (f"Vocab stored in {filename}")
         except Exception as e:
-            print (str(e))
-            print (f"Failed to store vocab in {filename}")
-    
+            raise RuntimeError(f'Failed to store vocab in {filename}.\nError: {str(e)}')
+
     def match_type(self, hash: int):
         """Determine the type for the water body.
         
@@ -129,11 +129,12 @@ class HydroMatch():
         type: str
             Type of the water body eg LAKE, RIVER
         """
+
         for key in self.vocab:
             if self.vocab[key] == hash:
                 return key
-        return "WATER_BODY"
-    
+        return 'WATER_BODY'
+
     def match(self, text: str):
         """Match given text against vocab.
         
@@ -157,27 +158,28 @@ class HydroMatch():
         all_matches: List
             List of all matches including the ones filtered out in the final matches.
         """
+
         if self.matcher is None:
-            raise AttributeError("Model is not set.")
-        
+            raise AttributeError('Model is not set.')
+
         doc = self.nlp(text)
-        matches = [(str(doc[match[1]:match[2]]), self.match_type(match[0]), match[1], match[2]) 
-                         for match in self.matcher(doc)]
-       
+        matches = [(str(doc[match[1]:match[2]]), self.match_type(match[0]), match[1], match[2])
+                   for match in self.matcher(doc)]
+
         entities = []
         final_matches = []
         for match in matches:
             if match[0].lower() in self.stop_words:
-                if str(doc[match[3]:match[3]+1]).lower() not in ["river", "lake"]:
+                if str(doc[match[3]:match[3] + 1]).lower() not in ['river', 'lake']:
                     continue
-            elif re.search("^[\sA-Z]+$", match[0]) or re.search("^[\sa-z]+$", match[0]):
+            elif re.search('^[\sA-Z]+$', match[0]) or re.search('^[\sa-z]+$', match[0]):
                 continue
             final_matches.append(match)
             entity = Span(doc, match[2], match[3], label=match[1])
             if match[1] in self.wikidata and match[0].lower() in self.wikidata[match[1]]:
                 entity._.set(
-                    "wikilink", 
-                    "https://www.wikidata.org/wiki/" + self.wikidata[match[1]][match[0].lower()]
+                    'wikilink',
+                    'https://www.wikidata.org/wiki/' + self.wikidata[match[1]][match[0].lower()]
                 )
             entities.append(entity)
         doc.ents = entities
