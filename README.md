@@ -18,34 +18,37 @@ pip install tqdm
 
 ## Usage
 
-Use the module file `waterwheel/hydromatch.py`
-
 ### Matching Text
 
 ```python
-from hydromatch import *
-hm = HydroMatch()
-matches, doc, _ = hm.match("Any Text")
+from waterwheel import WaterWheel
+import spacy
+
+nlp = spacy.load('en_core_web_sm')
+doc = nlp("Any Text")
+
+ww = WaterWheel(nlp)
+processed, matches, _ = ww(doc)
 
 #display results using displacy
-displacy.render(doc, style="ent", jupyter=True)
+displacy.render(processed, style="ent", jupyter=True)
 
 # Access to the wikidata:
-[print (ent, ent._.wikilink) for ent in doc.ents]
+[print (ent, ent._.wikilink) for ent in processed.ents]
 ```
 
 ### (Re)Loading Vocab
 
 ```python
-from hydromatch import *
-hm = HydroMatch()
+from waterwheel import WaterWheel
+ww = HydroMatch(nlp)
 
 #load from csv files (check documentation for details)
-hm.load_vocab_csvs(data_dir, append = False)
+ww.load_vocab_csvs(data_dir, append = False)
 
 #load directly from dict object (check documentation for details)
-hm.load_vocab(water_bodies, append = False)
+ww.load_vocab(water_bodies, append = False)
 
 #save vocab
-hm.save_vocab()
+ww.save_vocab()
 ```
