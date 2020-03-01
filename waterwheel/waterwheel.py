@@ -10,21 +10,24 @@ from spacy.matcher import PhraseMatcher
 from spacy.tokens import Doc, Span
 
 
-class HydroMatch():
+class WaterWheel():
     """Class for finding hydrologic entities in text"""
 
-    def __init__(self, matcher_file: Path = Path('resources/hydromatch.pkl')):
+    def __init__(self, nlp, matcher_file: Path = Path('resources/hydromatch.pkl')):
         """Initialize the class.
         
         Parameters
         ----------
+        nlp :
+            spacy nlp object
         matcher_file : Path, optional
             File path to load the vocab and wikidata.
             File created using HydroMatch::save_vocab method should be used for this.
         """
 
         self.matcher = None
-        self.nlp = spacy.load('en_core_web_sm')
+        #self.nlp = spacy.load('en_core_web_sm')
+        self.nlp = nlp
         self.vocab = {}
         self.wikidata = {}
         self.stop_words = set()
@@ -136,34 +139,33 @@ class HydroMatch():
                 return key
         return 'WATER_BODY'
 
-    def match(self, text: str):
+    def __call__(self, doc: Doc):
         """Match given text against vocab.
         
         Parameters
         ----------
-        text : str
-            Text to search for water bodies.
+        doc : Doc
+            spacy Doc to search for water bodies.
         
         Returns
         -------
-        final_matches: List
-            List of matches found in the text.
-            Format:
-                [(match_word, start, end), ...]
         doc: Doc
             spaCy Doc object containing entities with matches.
             To be rendered as:
                 displacy.render(doc, style="ent", jupyter=True)
             Get list of extra attributes for each entity/match:
                  [ent._.wikilink for ent in doc.ents]
+        final_matches: List
+            List of matches found in the text.
+            Format:
+                [(match_word, start, end), ...]
         all_matches: List
             List of all matches including the ones filtered out in the final matches.
         """
 
         if self.matcher is None:
             raise AttributeError('Model is not set.')
-
-        doc = self.nlp(text)
+        
         matches = [(str(doc[match[1]:match[2]]), self.match_type(match[0]), match[1], match[2])
                    for match in self.matcher(doc)]
 
@@ -184,4 +186,4 @@ class HydroMatch():
                 )
             entities.append(entity)
         doc.ents = entities
-        return final_matches, doc, matches
+        return doc, final_matches, matches
