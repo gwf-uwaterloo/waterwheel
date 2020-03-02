@@ -18,12 +18,10 @@ setuptools.setup(
     description="Spacy Module for Hydrologic Entity Extraction",
     long_description=readme(),
     long_description_content_type="text/markdown",
-    package_data={"waterwheel": [
-        "resources/hydromatcher.pkl",
-     ]},
     url="https://github.com/gwf-uwaterloo/waterwheel",
     install_requires=requires,
-    packages=setuptools.find_packages(),
+    include_package_data=True,
+    py_modules=['waterwheel'],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache Software License",

@@ -22,10 +22,10 @@ pip install tqdm
 
 ```python
 from waterwheel import WaterWheel
-import spacy
 
+import spacy
 nlp = spacy.load('en_core_web_sm')
-doc = nlp("Any Text")
+doc = nlp("Any Text like Amazon is awesome!")
 
 ww = WaterWheel(nlp)
 processed, matches, _ = ww(doc)
@@ -35,20 +35,4 @@ displacy.render(processed, style="ent", jupyter=True)
 
 # Access to the wikidata:
 [print (ent, ent._.wikilink) for ent in processed.ents]
-```
-
-### (Re)Loading Vocab
-
-```python
-from waterwheel import WaterWheel
-ww = HydroMatch(nlp)
-
-#load from csv files (check documentation for details)
-ww.load_vocab_csvs(data_dir, append = False)
-
-#load directly from dict object (check documentation for details)
-ww.load_vocab(water_bodies, append = False)
-
-#save vocab
-ww.save_vocab()
 ```
