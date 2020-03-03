@@ -683,7 +683,6 @@ ride
 right
 ring
 rise
-river
 road
 rock
 roll

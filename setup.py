@@ -10,7 +10,7 @@ requires = [
     'tqdm',
     'pandas'
 ]
-setuptools.setup(
+setup(
     name="waterwheel",
     version="0.1",
     author="Govind Sharma",
@@ -20,8 +20,14 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/gwf-uwaterloo/waterwheel",
     install_requires=requires,
+    packages=['waterwheel'],
+    package_data={'waterwheel': [
+        'waterwheel/resources/vocab.json',
+        'waterwheel/resources/wikidata.json',
+        'waterwheel/resources/stop_words.txt',
+        'waterwheel/resources/doc_bin.pkl'
+    ]},
     include_package_data=True,
-    py_modules=['waterwheel'],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache Software License",

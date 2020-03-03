@@ -1,2 +1,5 @@
 include README.md
-include resources/hydromatch.pkl
+include waterwheel/resources/vocab.json
+include waterwheel/resources/wikidata.json
+include waterwheel/resources/stop_words.txt
+include waterwheel/resources/doc_bin.pkl
