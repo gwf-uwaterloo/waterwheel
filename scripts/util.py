@@ -9,18 +9,19 @@ from tqdm import tqdm
 
 from spacy.tokens import Doc, Span, DocBin
 from spacy.matcher import PhraseMatcher
+from spacy import language
 
 doc_bin_file = Path(os.path.dirname(os.path.realpath(__file__))) / 'resources/doc_bin.pkl'
 vocab_file = Path(os.path.dirname(os.path.realpath(__file__))) / 'resources/vocab.json'
 wikidata_file = Path(os.path.dirname(os.path.realpath(__file__))) / 'resources/wikidata.json'
 stop_words_file = Path(os.path.dirname(os.path.realpath(__file__))) / 'resources/stop_words.txt'
 
-def read_files(nlp):
+def read_files(nlp: language):
     """Load necessary data from resource files.
     
     Parameters
     ----------
-    nlp:
+    nlp: language
         spacy nlp object
     
     Returns

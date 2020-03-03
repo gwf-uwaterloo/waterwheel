@@ -36,12 +36,3 @@ displacy.render(processed, style="ent", jupyter=True)
 # Access to the wikidata:
 [print (ent, ent._.wikilink) for ent in processed.ents]
 ```
-
-### (Re)Loading Vocab
-
-```python
-from waterwheel import wheel_util
-
-wheel_util.add_vocab_csvs(data_dir, nlp, append = True)
-# for details check documentation.
-```

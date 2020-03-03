@@ -8,21 +8,20 @@ from pathlib import Path
 from typing import Dict, List
 
 import spacy
+from spacy import language
 from spacy.matcher import PhraseMatcher
 from spacy.tokens import Doc, Span, DocBin
-
-from .wheel_util import read_files
 
 
 class WaterWheel():
     """Class for finding hydrologic entities in text"""
 
-    def __init__(self, nlp):
+    def __init__(self, nlp: language):
         """Initialize the class.
         
         Parameters
         ----------
-        nlp :
+        nlp : language
             spacy nlp object
         """
 
@@ -33,7 +32,7 @@ class WaterWheel():
         self.wikidata = {}
         self.stop_words = set()
         
-        self.vocab, self.wikidata, self.stop_words, self.matcher = read_files(self.nlp) 
+        self.load_features_data() 
         Span.set_extension('wikilink', default=None, force=True)
 
     def match_type(self, hash: int):
@@ -92,6 +91,7 @@ class WaterWheel():
                 if str(doc[match[3]:match[3] + 1]).lower() not in ['river', 'lake']:
                     continue
             elif re.search('^[\sA-Z]+$', match[0]) or re.search('^[\sa-z]+$', match[0]):
+                # skip mathces that are ALL_CAPS or all_small.
                 continue
             entity = Span(doc, match[2], match[3], label=match[1])
             if match[1] in self.wikidata and match[0].lower() in self.wikidata[match[1]]:
@@ -102,8 +102,48 @@ class WaterWheel():
             try:
                 doc.ents = entities + [entity]
             except ValueError:
+                # skip overlapping or intersecting matches.
                 continue
             entities.append(entity)
             final_matches.append(match)
         doc.ents = entities
         return doc, final_matches, matches
+    
+    def load_features_data(self):
+        """Load necessary data from resource files.
+        """
+        
+        doc_bin_file = Path(os.path.dirname(os.path.realpath(__file__))) / 'resources/doc_bin.pkl'
+        vocab_file = Path(os.path.dirname(os.path.realpath(__file__))) / 'resources/vocab.json'
+        wikidata_file = Path(os.path.dirname(os.path.realpath(__file__))) / 'resources/wikidata.json'
+        stop_words_file = Path(os.path.dirname(os.path.realpath(__file__))) / 'resources/stop_words.txt'
+        
+        try:
+            with open(vocab_file) as file:
+                self.vocab = json.load(file)
+        except Exception as e:
+            raise RuntimeError(f'Failed to load vocab from {vocab_file}.\nError: {str(e)}')
+
+        try:
+            with open(wikidata_file) as file:
+                self.wikidata = json.load(file)
+        except Exception as e:
+            raise RuntimeError(f'Failed to load wikidata from {wikidata_file}.\nError: {str(e)}')
+
+        try:
+            with open(stop_words_file) as file:
+                self.stop_words = set(file.read().splitlines())
+        except Exception as e:
+            raise RuntimeError(f'Failed to load stop_words from {stop_words_file}.\nError: {str(e)}')
+
+        try:
+            with open(doc_bin_file, 'rb') as file:
+                doc_bins_bytes = pickle.load(file)
+            doc_bins = {key: DocBin().from_bytes(value) for key, value in doc_bins_bytes.items()}
+            phrases_bin = {key: list(bin.get_docs(self.nlp.vocab)) for key, bin in doc_bins.items()}
+            self.matcher = PhraseMatcher(self.nlp.vocab, attr='LOWER')
+            for key, phrases in phrases_bin.items():
+                self.matcher.add(key.upper(), None, *phrases)
+                #matcher.add(key.upper(), phrases)
+        except Exception as e:
+            raise RuntimeError(f'Failed to load water bodies from {doc_bin_file_file}.\nError: {str(e)}')
