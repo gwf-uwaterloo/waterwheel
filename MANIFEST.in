@@ -1,5 +1,2 @@
 include README.md
-include waterwheel/resources/vocab.json
-include waterwheel/resources/wikidata.json
-include waterwheel/resources/stop_words.txt
-include waterwheel/resources/doc_bin.pkl
+include waterwheel/resources/doc_bins.msgpack

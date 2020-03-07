@@ -4,10 +4,10 @@ waterwheel package
 Submodules
 ----------
 
-waterwheel.hydromatch module
+waterwheel.waterwheel module
 ----------------------------
 
-.. automodule:: waterwheel.hydromatch
+.. automodule:: waterwheel.waterwheel
    :members:
    :undoc-members:
    :show-inheritance:
