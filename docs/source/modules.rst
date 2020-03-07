@@ -1,5 +1,5 @@
 waterwheel
-========
+==========
 
 .. toctree::
    :maxdepth: 4
