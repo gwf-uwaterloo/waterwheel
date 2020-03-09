@@ -145,5 +145,6 @@ def build_vocab_csvs(data_dir: Path, nlp: Language):
             (not re.search('^Q[0-9]+', df['Name'][i]))):
                 names = name_split(df['Name'][i])
                 # split 'amazon river' or 'river amazon' to 'amazon'
-                for name in names: water_bodies[wb_type].append((name, df['ID'][i]))
+                for name in names: 
+                    water_bodies[wb_type].append((name, df['ID'][i]))
     build_vocab(water_bodies, nlp)
