@@ -47,6 +47,11 @@ class TestWaterWheel(unittest.TestCase):
         self.assertEqual(str(doc.ents[0]), 'Is')
         self.assertEqual(str(doc.ents[1]), 'is')
         self.assertEqual(str(doc.ents[2]), 'IS')
+    
+    def test_known_bugs(self):
+        doc = self.nlp('The Mackenzie River flows from the Great Slave Lake into the Arctic Ocean.')
+        self.assertEqual(str(doc.ents[1]), 'Great Slave Lake')
+        self.assertEqual(str(doc.ents[1].label_), 'LAKE')
 
 if __name__ == '__main__':
     unittest.main()
