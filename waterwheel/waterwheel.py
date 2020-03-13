@@ -112,6 +112,15 @@ class WaterWheel(EntityRuler):
             except ValueError:
                 # skip overlapping or intersecting matches.
                 continue
+        # set wikilinks
+        for ent in doc.ents:
+            match_str = str(ent).lower()
+            label = ent.label_
+            if label in self._wikidata and match_str in self._wikidata[label]:
+                ent._.set(
+                    'wikilink',
+                    'https://www.wikidata.org/wiki/' + self._wikidata[label][match_str]
+                )
         return doc
     
     def __len__(self):

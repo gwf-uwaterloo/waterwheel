@@ -28,6 +28,9 @@ class TestWaterWheel(unittest.TestCase):
         self.assertEqual(str(doc.ents[3].label_), 'RIVER')
         self.assertEqual(str(doc.ents[4]), 'Churchill')
         self.assertEqual(str(doc.ents[4].label_), 'RIVER')
+
+        for ent in doc.ents:
+            self.assertIsNotNone(ent._.wikilink)
     
     def test_conjunctions(self):
         text = '''When a second fault line, the Saint Lawrence rift, 
@@ -40,9 +43,12 @@ class TestWaterWheel(unittest.TestCase):
         self.assertEqual(str(doc.ents[0]), 'Saint Lawrence')
         self.assertEqual(str(doc.ents[1]), 'Ontario')
         self.assertEqual(str(doc.ents[2]), 'Erie')
-        self.assertEqual(str(doc.ents[3]), 'Saint Lawrence River')
+        self.assertEqual(str(doc.ents[3]), 'Saint Lawrence')
         self.assertEqual(str(doc.ents[4]), 'Mississippi')
         self.assertEqual(str(doc.ents[5]), 'Missouri')
+
+        for ent in doc.ents:
+            self.assertIsNotNone(ent._.wikilink)
 
     def test_common_names(self):
         doc = self.nlp('Is Nile an actual river?')
@@ -52,14 +58,19 @@ class TestWaterWheel(unittest.TestCase):
         self.assertEqual(str(doc.ents[0]), 'Is')
         self.assertEqual(str(doc.ents[1]), 'is')
         self.assertEqual(str(doc.ents[2]), 'IS')
+        for ent in doc.ents:
+            self.assertIsNotNone(ent._.wikilink)
     
     def test_issue20(self):
         doc = self.nlp('The Mackenzie River flows from the Great Slave Lake into the Arctic Ocean.')
-        self.assertEqual(str(doc.ents[1]), 'Great Slave Lake')
+        self.assertEqual(str(doc.ents[1]), 'Great Slave')
         self.assertEqual(str(doc.ents[1].label_), 'LAKE')
         doc = self.nlp('The Mackenzie River flows from the great slave lake into the Arctic Ocean.')
-        self.assertEqual(str(doc.ents[1]), 'great slave lake')
+        self.assertEqual(str(doc.ents[1]), 'great slave')
         self.assertEqual(str(doc.ents[1].label_), 'LAKE')
+
+        for ent in doc.ents:
+            self.assertIsNotNone(ent._.wikilink)
 
 if __name__ == '__main__':
     unittest.main()
