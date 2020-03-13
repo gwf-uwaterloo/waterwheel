@@ -10,6 +10,7 @@ from collections import OrderedDict
 from spacy.tokens import DocBin
 from spacy.language import Language
 
+data_dir = Path(os.path.dirname(os.path.realpath(__file__))) / 'data'
 doc_bins_file = Path(os.path.dirname(os.path.realpath(__file__))) / 'data/doc_bins.msgpack'
 vocab_file = Path(os.path.dirname(os.path.realpath(__file__))) / 'data/vocab.json'
 wikidata_file = Path(os.path.dirname(os.path.realpath(__file__))) / 'data/wikidata.json'
@@ -77,7 +78,7 @@ def name_split(name: str):
     tokens = ['river', 'lake', 'basin']
     for token in tokens:
         s = s.replace(token, "")
-    return (name, s.strip())
+    return s.strip()
 
 def build_vocab(water_bodies: Dict, nlp: Language):
     """Load new vocab and wikidata.
@@ -115,19 +116,19 @@ def build_vocab(water_bodies: Dict, nlp: Language):
         vocab[str(nlp.vocab.strings[key])] = key
     write_data_files(vocab, wikidata, stop_words, doc_bins_bytes)
 
-def build_vocab_csvs(data_dir: Path, nlp: Language):
+def build_vocab_csvs(nlp: Language, data_dir: Path = data_dir):
     """Load data from csv files.
     
     Parameters
     ----------
+    nlp : Language
+        spacy nlp object
     data_dir : Path
         Path to the directory with csv files.
         Format:
             Each csv file should contain columns Name and ID
             Filename should be wikidata_{water_body_type}s.csv
             For example wikidata_rivers.csv
-    nlp : Language
-        spacy nlp object
     """
     
     water_bodies = {}
@@ -143,8 +144,6 @@ def build_vocab_csvs(data_dir: Path, nlp: Language):
             if (type(df['Name'][i]) is str and
             len(df['Name'][i]) > 1 and
             (not re.search('^Q[0-9]+', df['Name'][i]))):
-                names = name_split(df['Name'][i])
-                # split 'amazon river' or 'river amazon' to 'amazon'
-                for name in names: 
-                    water_bodies[wb_type].append((name, df['ID'][i]))
+                name = name_split(df['Name'][i]) 
+                water_bodies[wb_type].append((name, df['ID'][i]))
     build_vocab(water_bodies, nlp)

@@ -54,52 +54,64 @@ class WaterWheel(EntityRuler):
         doc : Doc
             The Doc with added entities, if available.
         """
-
+        
         matches = list(self.phrase_matcher(doc))
-        matches = set(
-            [(m_id, start, end) for m_id, start, end in matches if start != end]
-        )
+        matches = set([(m_id, start, end) for m_id, start, end in matches if start != end])
         get_sort_key = lambda m: (m[2] - m[1], m[1])
         matches = sorted(matches, key=get_sort_key, reverse=True)
         entities = [] if self.overwrite else list(doc.ents)
-        new_entities = []
+        new_entities = {}
+        candidate_entities = {}
+        pq = {'RIVER': 0, 'LAKE': 1, 'DRAINAGEBASIN': 2, 'WATERCOURSE': 3, 'WATER_BODY': 4}
         seen_tokens = set()
         for match_id, start, end in matches:
+            label = self._ent_ids[match_id]
+            match_str = str(doc[start:end])
+            qualifier = ""
+            if str(doc[end:end+1]).lower() in ['river', 'lake']:
+                qualifier = str(doc[end:end+1]).lower()
+            is_improper_noun = re.search('^[\sA-Z]+$', match_str) or re.search('^[\sa-z]+$', match_str)
+            is_stop_word = match_str.lower() in self._stop_words
+            # custom checks
             if any(t.ent_type for t in doc[start:end]) and not self.overwrite:
                 continue
-            # check for end - 1 here because boundaries are inclusive
-            if start in seen_tokens or end - 1 in seen_tokens:
-                continue
-            label = self._ent_ids[match_id]
-            span = Span(doc, start, end, label=label)
-            # custom checks
-            match_str = str(span)
-            if match_str.lower() in self._stop_words:
-                if str(doc[end:end+1]).lower() not in ['river', 'lake']:
+            if f'{start}:{end}' in new_entities:
+                # if an exact overlapping match occured before
+                if pq[new_entities[f'{start}:{end}']] <= pq[label]:
+                    # if previous match is better than current one.
                     continue
-            elif re.search('^[\sA-Z]+$', match_str) or re.search('^[\sa-z]+$', match_str):
-                # skip mathces that are ALL_CAPS or all_small.
+            elif start in seen_tokens or end - 1 in seen_tokens:
+                # intersection with previous match
                 continue
-            try:
-                doc.ents = new_entities + [span]
-            except ValueError:
-                # skip overlapping or intersecting matches.
+            elif qualifier != "" and label.lower() != qualifier:
+                # if the match is followed by river/lake
+                candidate_entities[f'{start}:{end}'] = label
                 continue
-            
-            new_entities.append(span)
+            elif qualifier == "" and (is_stop_word or is_improper_noun):
+                continue
+            # register new entity
+            new_entities[f'{start}:{end}'] = label
             entities = [
                 e for e in entities if not (e.start < end and e.end > start)
             ]
             seen_tokens.update(range(start, end))
-            
-            # TODO maybe explore Entity Linking here. 
-            if label in self._wikidata and match_str.lower() in self._wikidata[label]:
-                span._.set(
-                    'wikilink',
-                    'https://www.wikidata.org/wiki/' + self._wikidata[label][match_str.lower()]
-                )
-            
-        doc.ents = entities + new_entities
+        
+        final_entities = []
+        for key, label in new_entities.items():
+            indices = key.split(':')
+            start, end = int(indices[0]), int(indices[1])
+            final_entities.append(Span(doc, start, end, label=label))     
+        doc.ents = entities + final_entities
+        
+        for key, label in candidate_entities.items():
+            indices = key.split(':')
+            start, end = int(indices[0]), int(indices[1])
+            span = Span(doc, start, end, label=label)
+            try:
+                doc.ents = list(doc.ents) + [span]
+            except ValueError:
+                # skip overlapping or intersecting matches.
+                continue
         return doc
     
     def __len__(self):

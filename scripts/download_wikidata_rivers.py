@@ -8,7 +8,7 @@ subquery = """
 SELECT ?item ?itemLabel ?altLabel
 WHERE 
 {
-  ?item wdt:P31 wd:Q4022.
+  ?item p:P31/ps:P31/wdt:P279* wd:Q4022.
   ?item wdt:P2043 ?length
   OPTIONAL { ?item skos:altLabel ?altLabel . FILTER (lang(?altLabel) = "en") }
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }

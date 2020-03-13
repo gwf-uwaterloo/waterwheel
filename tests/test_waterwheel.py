@@ -19,10 +19,15 @@ class TestWaterWheel(unittest.TestCase):
         doc = self.nlp(text)
 
         self.assertEqual(str(doc.ents[0]), 'Mississippi')
+        self.assertEqual(str(doc.ents[0].label_), 'RIVER')
         self.assertEqual(str(doc.ents[1]), 'Missouri')
+        self.assertEqual(str(doc.ents[1].label_), 'RIVER')
         self.assertEqual(str(doc.ents[2]), 'Mackenzie')
+        self.assertEqual(str(doc.ents[2].label_), 'RIVER')
         self.assertEqual(str(doc.ents[3]), 'Nelson')
-        self.assertEqual(str(doc.ents[4]), 'Churchill River')
+        self.assertEqual(str(doc.ents[3].label_), 'RIVER')
+        self.assertEqual(str(doc.ents[4]), 'Churchill')
+        self.assertEqual(str(doc.ents[4].label_), 'RIVER')
     
     def test_conjunctions(self):
         text = '''When a second fault line, the Saint Lawrence rift, 
@@ -47,6 +52,14 @@ class TestWaterWheel(unittest.TestCase):
         self.assertEqual(str(doc.ents[0]), 'Is')
         self.assertEqual(str(doc.ents[1]), 'is')
         self.assertEqual(str(doc.ents[2]), 'IS')
+    
+    def test_issue20(self):
+        doc = self.nlp('The Mackenzie River flows from the Great Slave Lake into the Arctic Ocean.')
+        self.assertEqual(str(doc.ents[1]), 'Great Slave Lake')
+        self.assertEqual(str(doc.ents[1].label_), 'LAKE')
+        doc = self.nlp('The Mackenzie River flows from the great slave lake into the Arctic Ocean.')
+        self.assertEqual(str(doc.ents[1]), 'great slave lake')
+        self.assertEqual(str(doc.ents[1].label_), 'LAKE')
 
 if __name__ == '__main__':
     unittest.main()
