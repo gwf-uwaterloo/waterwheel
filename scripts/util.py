@@ -78,7 +78,7 @@ def name_split(name: str):
     tokens = ['river', 'lake', 'basin']
     for token in tokens:
         s = s.replace(token, "")
-    return (name, s.strip())
+    return s.strip()
 
 def build_vocab(water_bodies: Dict, nlp: Language):
     """Load new vocab and wikidata.
@@ -144,8 +144,6 @@ def build_vocab_csvs(nlp: Language, data_dir: Path = data_dir):
             if (type(df['Name'][i]) is str and
             len(df['Name'][i]) > 1 and
             (not re.search('^Q[0-9]+', df['Name'][i]))):
-                names = name_split(df['Name'][i])
-                # split 'amazon river' or 'river amazon' to 'amazon'
-                for name in names: 
-                    water_bodies[wb_type].append((name, df['ID'][i]))
+                name = name_split(df['Name'][i]) 
+                water_bodies[wb_type].append((name, df['ID'][i]))
     build_vocab(water_bodies, nlp)
