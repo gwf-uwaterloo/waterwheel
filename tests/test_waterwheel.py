@@ -8,7 +8,7 @@ class TestWaterWheel(unittest.TestCase):
         self.nlp = spacy.load('en_core_web_sm')
         self.ww = WaterWheel(self.nlp)
         self.nlp.add_pipe(self.ww)
-    
+
     def test_pipeline_added(self):
         self.assertEqual(self.nlp.pipe_names[-1], 'waterwheel')
 
@@ -32,7 +32,24 @@ class TestWaterWheel(unittest.TestCase):
         self.assertEqual(str(doc.ents[1].label_), 'RIVER')
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
-        
+
+        doc = self.nlp('This image of the Pacific Ocean seafloor and land elevations was created by the World Data Center.')
+        self.assertEqual(str(doc.ents[0]), 'Pacific Ocean')
+        self.assertEqual(str(doc.ents[0].label_), 'OCEAN')
+        doc = self.nlp('This image of the Pacific Ocean seafloor and land elevations was created by the World Data Center.')
+        self.assertEqual(str(doc.ents[0]), 'pacific sea')
+        self.assertEqual(str(doc.ents[0].label_), 'OCEAN')
+        for ent in doc.ents:
+            self.assertIsNotNone(ent._.wikilink)
+
+        doc = self.nlp('Manitoba is bordered by Ontario.')
+        self.assertEqual(str(doc.ents[0]), 'Manitoba')
+        self.assertEqual(str(doc.ents[0].label_), 'PROVINCE')
+        self.assertEqual(str(doc.ents[1]), 'Ontario')
+        self.assertEqual(str(doc.ents[1].label_), 'PROVINCE')
+        for ent in doc.ents:
+            self.assertIsNotNone(ent._.wikilink)
+
     def test_common_uncommon_overlap(self):
         text = 'The River Cherwell is a major tributary of the River Thames in central England.'
         doc = self.nlp(text)
@@ -50,10 +67,19 @@ class TestWaterWheel(unittest.TestCase):
         self.assertEqual(str(doc.ents[1].label_), 'RIVER')
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
-    
+
+        text = 'The Pacific has double the area and more than double the water volume of the Atlantic Ocean'
+        doc = self.nlp(text)
+        self.assertEqual(str(doc.ents[0]), 'Pacific')
+        self.assertEqual(str(doc.ents[0].label_), 'OCEAN')
+        self.assertEqual(str(doc.ents[1]), 'Atlantic Ocean')
+        self.assertEqual(str(doc.ents[1].label_), 'OCEAN')
+        for ent in doc.ents:
+            self.assertIsNotNone(ent._.wikilink)
+
     def test_compound_references(self):
-        text = '''Aggregated gridded soil texture dataset 
-        for Mississippi/Missouri Rivers, 
+        text = '''Aggregated gridded soil texture dataset
+        for Mississippi/Missouri Rivers,
         Mackenzie and Nelson-Churchill River Basins.'''
         doc = self.nlp(text)
 
@@ -70,10 +96,10 @@ class TestWaterWheel(unittest.TestCase):
 
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
-    
+
     def test_conjunctions(self):
-        text = '''When a second fault line, the Saint Lawrence rift, 
-        formed approximately 570 million years ago,[15] the basis for 
+        text = '''When a second fault line, the Saint Lawrence rift,
+        formed approximately 570 million years ago,[15] the basis for
         Lakes Ontario and Erie were created, along with what would become
          the Saint Lawrence River. And the Mississippi and Missouri Rivers.
         '''
@@ -94,7 +120,17 @@ class TestWaterWheel(unittest.TestCase):
 
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
-    
+
+        doc = self.nlp(' Eastern boundary of Yukon mostly follows the divide between the Yukon River Basin and the Mackenzie River watershed.')
+        self.assertEqual(str(doc.ents[0]), 'Yukon')
+        self.assertEqual(str(doc.ents[0].label_), 'PROVINCE')
+        self.assertEqual(str(doc.ents[1]), 'Yukon River')
+        self.assertEqual(str(doc.ents[1].label_), 'RIVER')
+        self.assertEqual(str(doc.ents[2]), 'Mackenzie River')
+        self.assertEqual(str(doc.ents[2].label_), 'RIVER')
+        for ent in doc.ents:
+            self.assertIsNotNone(ent._.wikilink)
+
     def test_qualifier_effect(self):
         text = 'Is Mississippi a river or a lake?'
         doc = self.nlp(text)
@@ -133,7 +169,7 @@ class TestWaterWheel(unittest.TestCase):
         self.assertEqual(str(doc.ents[2].label_), 'RIVER')
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
-    
+
     def test_issue20(self):
         doc = self.nlp('The Mackenzie River flows from the Great Slave Lake into the Arctic Ocean.')
         self.assertEqual(str(doc.ents[1]), 'Great Slave Lake')
