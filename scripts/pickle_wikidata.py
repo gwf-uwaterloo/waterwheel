@@ -11,7 +11,9 @@ from tqdm import tqdm
 
 L = pd.read_csv("H:\\Courses\\RA\\wikidata-water-features\\data\\wikidata_lakes.csv")
 R = pd.read_csv("H:\\Courses\\RA\\wikidata-water-features\\data\\wikidata_rivers.csv")
-wikidata = {"LAKE": {}, "RIVER": {}}
+J = pd.read_csv("H:\\Courses\\RA\\wikidata-water-features\\data\\wikidata_canadianprovinces.csv")
+K = pd.read_csv("H:\\Courses\\RA\\wikidata-water-features\\data\\wikidata_oceans.csv")
+wikidata = {"LAKE": {}, "RIVER": {}, "PROVINCE": {}, "OCEAN": {}}
 
 for i in range(len(L)):
     if not re.search("^Q[0-9]+", L["Name"][i]):
@@ -19,6 +21,12 @@ for i in range(len(L)):
 for i in range(len(R)):
     if not re.search("^Q[0-9]+", R["Name"][i]):
         wikidata["RIVER"][R["Name"][i].lower()] = R["ID"][i]
+for i in range(len(J)):
+    if not re.search("^Q[0-9]+", R["Name"][i]):
+        wikidata["PROVINCE"][R["Name"][i].lower()] = R["ID"][i]
+for i in range(len(K)):
+    if not re.search("^Q[0-9]+", R["Name"][i]):
+        wikidata["OCEAN"][R["Name"][i].lower()] = R["ID"][i]
 
 with open("H:\\Courses\\RA\\wikidata-water-features\\scripts\\hydro_matcher.pkl", "rb") as file:
     vocab, matcher = pickle.load(file)
