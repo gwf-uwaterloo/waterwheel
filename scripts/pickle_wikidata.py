@@ -23,10 +23,10 @@ for i in range(len(R)):
         wikidata["RIVER"][R["Name"][i].lower()] = R["ID"][i]
 for i in range(len(J)):
     if not re.search("^Q[0-9]+", R["Name"][i]):
-        wikidata["PROVINCE"][R["Name"][i].lower()] = R["ID"][i]
+        wikidata["PROVINCE"][J["Name"][i].lower()] = J["ID"][i]
 for i in range(len(K)):
     if not re.search("^Q[0-9]+", R["Name"][i]):
-        wikidata["OCEAN"][R["Name"][i].lower()] = R["ID"][i]
+        wikidata["OCEAN"][K["Name"][i].lower()] = K["ID"][i]
 
 with open("H:\\Courses\\RA\\wikidata-water-features\\scripts\\hydro_matcher.pkl", "rb") as file:
     vocab, matcher = pickle.load(file)
