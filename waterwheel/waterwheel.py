@@ -2,7 +2,7 @@ import re
 import os
 import srsly
 from pathlib import Path
-from typing import Dict
+from typing import Dict, List
 from collections import defaultdict, OrderedDict
 
 from spacy.util import ensure_path
@@ -27,7 +27,8 @@ class WaterWheel(EntityRuler):
         Parameters
         ----------
         nlp : Language
-            spacy nlp object
+            The shared nlp object to pass the vocab to the matchers
+            and process phrase patterns.
         overwrite_ents : bool, optional
             If True then doc.ents from preceeding pipeline components
             are removed/overwritten. Otherwise, previous doc.ents are kept
@@ -38,6 +39,10 @@ class WaterWheel(EntityRuler):
         self._stop_words = set()
         self._wikidata = {}
         self._doc_bins = {}
+        # if a match without a qualifier can be of multiple potential types then
+        # this is used to set priority.
+        self._pq = {label: iter for iter, label in 
+            enumerate(['RIVER', 'LAKE', 'DRAINAGEBASIN', 'WATERCOURSE', 'WATER_BODY'])}
         self.from_disk(DOC_BIN_FILE)
         Span.set_extension('wikilink', default=None, force=True)
 
@@ -54,65 +59,58 @@ class WaterWheel(EntityRuler):
         doc : Doc
             The Doc with added entities, if available.
         """
-        
+
+        if self.overwrite:
+            doc.ents = []
         matches = list(self.phrase_matcher(doc))
-        matches = set([(m_id, start, end) for m_id, start, end in matches if start != end])
-        get_sort_key = lambda m: (m[2] - m[1], m[1])
-        matches = sorted(matches, key=get_sort_key, reverse=True)
-        entities = [] if self.overwrite else list(doc.ents)
-        new_entities = {}
-        candidate_entities = {}
-        pq = {'RIVER': 0, 'LAKE': 1, 'DRAINAGEBASIN': 2, 'WATERCOURSE': 3, 'WATER_BODY': 4}
-        seen_tokens = set()
-        for match_id, start, end in matches:
-            label = self._ent_ids[match_id]
-            match_str = str(doc[start:end])
-            qualifier = ""
-            if str(doc[end:end+1]).lower() in ['river', 'lake']:
-                qualifier = str(doc[end:end+1]).lower()
-            is_improper_noun = re.search('^[\sA-Z]+$', match_str) or re.search('^[\sa-z]+$', match_str)
-            is_stop_word = match_str.lower() in self._stop_words
-            # custom checks
+        matches = sorted([(start, end, self._ent_ids[m_id]) for m_id, start, end in matches if start != end])
+        current_range = set()
+        match_groups = []
+        for start, end, label in matches:
             if any(t.ent_type for t in doc[start:end]) and not self.overwrite:
                 continue
-            if f'{start}:{end}' in new_entities:
-                # if an exact overlapping match occured before
-                if pq[new_entities[f'{start}:{end}']] <= pq[label]:
-                    # if previous match is better than current one.
-                    continue
-            elif start in seen_tokens or end - 1 in seen_tokens:
-                # intersection with previous match
+            match_str = str(doc[start:end])
+            is_improper_noun = re.search('^[\sA-Z]+$', match_str) or re.search('^[\sa-z]+$', match_str)
+            is_improper_noun = is_improper_noun is not None
+            is_stop_word = match_str.lower() in self._stop_words
+            q_before = str(doc[start-1:start]).lower() == label.lower()
+            q_after = str(doc[end:end+1]).lower() == label.lower()
+            end += q_after
+            # precedence given to proceeding qualifier over preceding one.
+            start -= q_before and not q_after
+            if not (q_before or q_after) and (is_stop_word or is_improper_noun):
+                # skip stop_words/improper nouns wihtout qualifiers.
                 continue
-            elif qualifier != "" and label.lower() != qualifier:
-                # if the match is followed by river/lake
-                candidate_entities[f'{start}:{end}'] = label
-                continue
-            elif qualifier == "" and (is_stop_word or is_improper_noun):
-                continue
-            # register new entity
-            new_entities[f'{start}:{end}'] = label
-            entities = [
-                e for e in entities if not (e.start < end and e.end > start)
-            ]
-            seen_tokens.update(range(start, end))
-        
-        final_entities = []
-        for key, label in new_entities.items():
-            indices = key.split(':')
-            start, end = int(indices[0]), int(indices[1])
-            final_entities.append(Span(doc, start, end, label=label))     
-        doc.ents = entities + final_entities
-        
-        for key, label in candidate_entities.items():
-            indices = key.split(':')
-            start, end = int(indices[0]), int(indices[1])
-            span = Span(doc, start, end, label=label)
+            if start in current_range or end - 1 in current_range:
+                current_range.update(range(start, end))
+            else:
+                current_range = set(range(start, end))
+                match_groups.append([])
+            match_groups[-1].append({
+                'match_str': match_str,
+                'start': start, 
+                'end': end, 
+                'label': label,
+                'is_qualified': q_before or q_after,
+                'is_uncommon': not is_stop_word,
+                'is_proper_noun': not is_improper_noun,
+                'length': end - start,
+                'priority': self._pq[label]
+            })
+        final_matches = self._filter_matches(match_groups)
+        for match in final_matches:
+            span = Span(doc, match['start'], match['end'], label = match['label'])
+            span._.set(
+                'wikilink',
+                'https://www.wikidata.org/wiki/' + self._wikidata[match['label']][match['match_str'].lower()]
+            )
             try:
                 doc.ents = list(doc.ents) + [span]
             except ValueError:
                 # skip overlapping or intersecting matches.
                 continue
         return doc
+        
     
     def __len__(self):
         """The number of all water_bodies."""
@@ -120,6 +118,129 @@ class WaterWheel(EntityRuler):
         for key in self._doc_bins:
             n_phrases += len(self._doc_bins[key])
         return n_phrases
+    
+    def _filter_matches(self, match_groups: List):
+        """Filter matches according to following procedure:
+        In case of overlap, give precedence to uncommon words over common words.
+            Example: In 'The Lake Ontario', 'Lake Ontario' is chosen over 'The Lake'.
+        In case of multiple potential match types, decide according to qualifier.
+            Example: In 'Mississippi River', type 'RIVER' is set over 'LAKE'.
+        In case of overlap, give precedence to maximal span.
+            Example: In 'Nile River', 'Nile River' is matched over just 'Nile'.
+        In case of multiple potential match types and no qualifier,
+            decicde according to default type priority.
+            Example: In 'Mississipi is something', type 'RIVER' is set over 'LAKE'.
+        In case of overlap, give precedence to match with proper noun.
+            Example: In 'superior lake Ontario', 'lake Ontario' is chosen over 
+                'superior lake'.
+        In case of overlap, consume match from left to right and ignore leftovers.
+            Example: In 'Great Slave Lake Ontario', 'Great Slave Lake' is chosen
+                and 'Lake Ontario' is ignored/skipped.
+        Parameters
+        ----------
+        match_groups : List
+            List of matches in same overlapping regions.
+        
+        Returns
+        -------
+        final_matches : List
+            List of non overlapping matches filtered by the procedure.
+        """
+        final_matches = []
+        seen = set()
+        for group in match_groups:
+            ordered_lists = [[i for i in range(len(group))]]
+            new_ordered_lists = []
+
+            for lst in ordered_lists:
+                new_ordered_lists.extend(self._separator(group, lst, 'is_uncommon'))
+            ordered_lists = new_ordered_lists
+            new_ordered_lists = []
+
+            for lst in ordered_lists:
+                new_ordered_lists.extend(self._separator(group, lst, 'is_qualified'))
+            ordered_lists = new_ordered_lists
+            new_ordered_lists = []
+
+            for lst in ordered_lists:
+                new_ordered_lists.append(self._sorter(group, lst, 'length', reverse = True))
+            ordered_lists = new_ordered_lists
+            new_ordered_lists = []
+
+            for lst in ordered_lists:
+                new_ordered_lists.append(self._sorter(group, lst, 'priority'))
+            ordered_lists = new_ordered_lists
+            new_ordered_lists = []
+
+            for lst in ordered_lists:
+                new_ordered_lists.extend(self._separator(group, lst, 'is_proper_noun'))
+            ordered_lists = new_ordered_lists
+            new_ordered_lists = []
+
+            for lst in ordered_lists:
+                new_ordered_lists.append(self._sorter(group, lst, 'start'))
+            ordered_lists = new_ordered_lists
+            new_ordered_lists = []
+            
+            for lst in ordered_lists:
+                for index in lst:
+                    if group[index]['start'] in seen and group[index]['end'] - 1 in seen:
+                        continue
+                    seen.update(range(group[index]['start'], group[index]['end']))
+                    final_matches.append(group[index])
+        return final_matches
+    
+    def _separator(self, group: List, lst: List, attr: str):
+        """Separates a list into two lists according to
+        bool value of match attr in the list.
+        
+        Parameters
+        ----------
+        group : List
+            A list of overlapping matches.
+        lst : List
+            A ordering of matches in group.
+        attr : str
+            Attribute to check for in matches.
+        
+        Returns
+        -------
+        ret_list : List
+            A list containing:
+            1) A list of matches with attr value True.
+            2) A list of matches with attr value False.
+        """
+        list_a = [i for i in lst if group[i][attr]]
+        list_b = [i for i in lst if not group[i][attr]]
+        ret_list = []
+        if len(list_a) > 0:
+            ret_list.append(list_a)
+        if len(list_b) > 0:
+            ret_list.append(list_b)
+        return [list_a, list_b]
+    
+    def _sorter(self, group: List, lst: List, attr: str, reverse: bool = False):
+        """Separates a list into two lists according to
+        bool value of match attr in the list.
+        
+        Parameters
+        ----------
+        group : List
+            A list of overlapping matches.
+        lst : List
+            A ordering of matches in group.
+        attr : str
+            Attribute to check for in matches.
+        reverse : bool, optional
+            True for descending sort. 
+            False (by default) for ascending sort.
+        
+        Returns
+        -------
+        ret_list : List
+            A list sorted according attr value.
+        """
+        return sorted(lst, key = lambda x: group[x][attr], reverse = reverse)
 
     def to_bytes(self, **kwargs):
         """Serialize waterwheel data to a bytestring.
