@@ -51,7 +51,7 @@ try:
     for key, name in pairs:
         csv += f"{name.replace(',', ';')},{key.replace(',', ';')}\n"
 
-    with open("wikidata_oceans.csv", "w") as file:
+    with open("wikidata_canadianprovinces.csv", "w") as file:
         file.write(csv.encode('ascii', 'ignore').decode())
 except Exception as e:
     print (str(e))
