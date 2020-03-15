@@ -11,11 +11,10 @@ from spacy.pipeline import EntityRuler
 from spacy.tokens import Doc, Span, DocBin
 
 DOC_BIN_FILE = Path(os.path.dirname(os.path.realpath(__file__))) / 'resources/doc_bins.msgpack'
-print (os.path.dirname('resources/doc_bins.msgpack'))
 
 class WaterWheel(EntityRuler):
     """WATERWHEEL (WATERloo Water and Hydrologic Entity Extractor and Linker)
-    is a spaCy  pipeline component that detects rivers, lakes, and other
+    is a spaCy  pipeline component that detects rivers, lakes, and other 
     hydrologic entities, and links these entities to Wikidata. The
     component is typically added to the pipeline using `nlp.add_pipe`
     """
@@ -24,7 +23,7 @@ class WaterWheel(EntityRuler):
 
     def __init__(self, nlp: Language, overwrite_ents: bool = True):
         """Initialize the class.
-
+        
         Parameters
         ----------
         nlp : Language
@@ -40,21 +39,26 @@ class WaterWheel(EntityRuler):
         self._stop_words = set()
         self._wikidata = {}
         self._doc_bins = {}
+        self._qualifiers = defaultdict(lambda: [])
         # if a match without a qualifier can be of multiple potential types then
         # this is used to set priority.
-        self._pq = {label: iter for iter, label in
-            enumerate(['RIVER', 'LAKE', 'DRAINAGEBASIN', 'WATERCOURSE', 'WATER_BODY'])}
+        self._pq = {
+            label: iter for iter, label in enumerate([
+                'OCEAN', 'CANADIAN_PROVINCE', 'RIVER', 
+                'LAKE', 'DRAINAGEBASIN', 'WATERCOURSE', 
+                'WATER_BODY'
+        ])}
         self.from_disk(DOC_BIN_FILE)
         Span.set_extension('wikilink', default=None, force=True)
 
     def __call__(self, doc: Doc):
         """Find matches in document and add them as entities
-
+        
         Parameters
         ----------
         doc : Doc
             The Doc object in the pipeline.
-
+        
         Returns
         -------
         doc : Doc
@@ -65,32 +69,37 @@ class WaterWheel(EntityRuler):
             doc.ents = []
         matches = list(self.phrase_matcher(doc))
         matches = sorted([(start, end, self._ent_ids[m_id]) for m_id, start, end in matches if start != end])
-        current_range = set()
-        match_groups = []
+        match_dicts = []
+        # stick together qualifiers with matcher wherever possible.
         for start, end, label in matches:
             if any(t.ent_type for t in doc[start:end]) and not self.overwrite:
                 continue
             match_str = str(doc[start:end])
-            is_improper_noun = re.search('^[\sA-Z]+$', match_str) or re.search('^[\sa-z]+$', match_str)
-            is_improper_noun = is_improper_noun is not None
+            is_all_caps = re.search('^[\sA-Z]+$', match_str) is not None
+            is_all_lower =  re.search('^[\sa-z]+$', match_str) is not None
+            is_improper_noun = is_all_caps or is_all_lower
             is_stop_word = match_str.lower() in self._stop_words
-            q_before = str(doc[start-1:start]).lower() == label.lower()
-            q_after = str(doc[end:end+1]).lower() == label.lower()
+            q_before = str(doc[start-1:start]).lower() in self._qualifiers[label]
+            q_after = str(doc[end:end+1]).lower() in self._qualifiers[label]
             end += q_after
             # precedence given to proceeding qualifier over preceding one.
             start -= q_before and not q_after
-            if not (q_before or q_after) and (is_stop_word or is_improper_noun):
-                # skip stop_words/improper nouns wihtout qualifiers.
-                continue
-            if start in current_range or end - 1 in current_range:
-                current_range.update(range(start, end))
-            else:
-                current_range = set(range(start, end))
-                match_groups.append([])
-            match_groups[-1].append({
+            # prelimenary filters
+            if not (q_before or q_after):
+                # skip unqualified/improper/stop_words
+                # unless it is province abbreviation
+                if label == 'CANADIAN_PROVINCE':
+                    # all abbreviations are 4 chars or less.
+                    if is_all_caps and len(match_str) < 5:
+                        pass
+                    elif is_stop_word or is_improper_noun:
+                        continue
+                elif is_stop_word or is_improper_noun:
+                    continue
+            match_dicts.append({
                 'match_str': match_str,
-                'start': start,
-                'end': end,
+                'start': start, 
+                'end': end, 
                 'label': label,
                 'is_qualified': q_before or q_after,
                 'is_uncommon': not is_stop_word,
@@ -98,7 +107,20 @@ class WaterWheel(EntityRuler):
                 'length': end - start,
                 'priority': self._pq[label]
             })
+        match_dicts = sorted(match_dicts, key = lambda x: x['start'])
+        current_range = set()
+        match_groups = []
+        # arrange the matches in overlapping groups.
+        for match in match_dicts:
+            if match['start'] in current_range or match['end'] - 1 in current_range:
+                current_range.update(range(match['start'], match['end']))
+            else:
+                current_range = set(range(match['start'], match['end']))
+                match_groups.append([])
+            match_groups[-1].append(match)
+        # filter out best matches in each group.
         final_matches = self._filter_matches(match_groups)
+        # set wikilinks to final matches.
         for match in final_matches:
             span = Span(doc, match['start'], match['end'], label = match['label'])
             span._.set(
@@ -111,15 +133,15 @@ class WaterWheel(EntityRuler):
                 # skip overlapping or intersecting matches.
                 continue
         return doc
-
-
+        
+    
     def __len__(self):
         """The number of all water_bodies."""
         n_phrases = 0
         for key in self._doc_bins:
             n_phrases += len(self._doc_bins[key])
         return n_phrases
-
+    
     def _filter_matches(self, match_groups: List):
         """Filter matches according to following procedure:
         In case of overlap, give precedence to uncommon words over common words.
@@ -132,7 +154,7 @@ class WaterWheel(EntityRuler):
             decicde according to default type priority.
             Example: In 'Mississipi is something', type 'RIVER' is set over 'LAKE'.
         In case of overlap, give precedence to match with proper noun.
-            Example: In 'superior lake Ontario', 'lake Ontario' is chosen over
+            Example: In 'superior lake Ontario', 'lake Ontario' is chosen over 
                 'superior lake'.
         In case of overlap, consume match from left to right and ignore leftovers.
             Example: In 'Great Slave Lake Ontario', 'Great Slave Lake' is chosen
@@ -141,7 +163,7 @@ class WaterWheel(EntityRuler):
         ----------
         match_groups : List
             List of matches in same overlapping regions.
-
+        
         Returns
         -------
         final_matches : List
@@ -182,7 +204,7 @@ class WaterWheel(EntityRuler):
                 new_ordered_lists.append(self._sorter(group, lst, 'start'))
             ordered_lists = new_ordered_lists
             new_ordered_lists = []
-
+            
             for lst in ordered_lists:
                 for index in lst:
                     if group[index]['start'] in seen and group[index]['end'] - 1 in seen:
@@ -190,11 +212,11 @@ class WaterWheel(EntityRuler):
                     seen.update(range(group[index]['start'], group[index]['end']))
                     final_matches.append(group[index])
         return final_matches
-
+    
     def _separator(self, group: List, lst: List, attr: str):
         """Separates a list into two lists according to
         bool value of match attr in the list.
-
+        
         Parameters
         ----------
         group : List
@@ -203,7 +225,7 @@ class WaterWheel(EntityRuler):
             A ordering of matches in group.
         attr : str
             Attribute to check for in matches.
-
+        
         Returns
         -------
         ret_list : List
@@ -219,11 +241,11 @@ class WaterWheel(EntityRuler):
         if len(list_b) > 0:
             ret_list.append(list_b)
         return [list_a, list_b]
-
+    
     def _sorter(self, group: List, lst: List, attr: str, reverse: bool = False):
         """Separates a list into two lists according to
         bool value of match attr in the list.
-
+        
         Parameters
         ----------
         group : List
@@ -233,9 +255,9 @@ class WaterWheel(EntityRuler):
         attr : str
             Attribute to check for in matches.
         reverse : bool, optional
-            True for descending sort.
+            True for descending sort. 
             False (by default) for ascending sort.
-
+        
         Returns
         -------
         ret_list : List
@@ -245,7 +267,7 @@ class WaterWheel(EntityRuler):
 
     def to_bytes(self, **kwargs):
         """Serialize waterwheel data to a bytestring.
-
+        
         Returns
         -------
         serial : bytes
@@ -262,7 +284,7 @@ class WaterWheel(EntityRuler):
             )
         )
         return srsly.msgpack_dumps(serial)
-
+    
     def from_bytes(self, serial: bytes, **kwargs):
         """Load waterwheel from a bytestring.
 
@@ -270,7 +292,7 @@ class WaterWheel(EntityRuler):
         ----------
         serial : bytes
             The serialized bytes data.
-
+        
         Returns
         -------
         self : WaterWheel
@@ -282,6 +304,7 @@ class WaterWheel(EntityRuler):
             vocab = cfg.get('vocab', {})
             for hash, label in vocab.items():
                 self._ent_ids[int(hash)] = label
+                self._qualifiers[label] = [label.lower(), label.lower()+'s']
             self._stop_words = cfg.get('stop_words', [])
             self._stop_words = set(self._stop_words)
             self._wikidata = cfg.get('wikidata', {})
@@ -295,7 +318,7 @@ class WaterWheel(EntityRuler):
 
     def to_disk(self, path, **kwargs):
         """Serialize waterwheel data to a file.
-
+        
         Parameters
         ----------
         path : Path
@@ -305,7 +328,7 @@ class WaterWheel(EntityRuler):
         path = ensure_path(path)
         serial = self.to_bytes()
         srsly.write_msgpack(path, serial)
-
+        
     def from_disk(self, path, **kwargs):
         """Load waterwheel from a file. Expects file to contain
         a bytestring of the following dict format:
@@ -320,7 +343,7 @@ class WaterWheel(EntityRuler):
         ----------
         path : Path
             path to the serialized file.
-
+        
         Returns
         -------
         self : WaterWheel
