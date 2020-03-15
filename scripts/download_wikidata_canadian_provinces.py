@@ -8,7 +8,7 @@ subquery = """
 SELECT ?item ?itemLabel ?altLabel
 WHERE
 {
-  ?item p:P31/ps:P31/wdt:P279* wd:Q9430.
+  ?item p:P31/ps:P31/wdt:P279* wd:Q2879.
   ?article schema:about ?item.
   OPTIONAL { ?item skos:altLabel ?altLabel . FILTER (lang(?altLabel) = "en") }
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
@@ -52,7 +52,7 @@ try:
     for key, name in pairs:
         csv += f"{name.replace(',', ';')},{key.replace(',', ';')}\n"
 
-    with open("wikidata_oceans.csv", "w") as file:
+    with open("wikidata_canadian_provinces.csv", "w") as file:
         file.write(csv.encode('ascii', 'ignore').decode())
 except Exception as e:
     print (str(e))

@@ -18,7 +18,7 @@ stop_words_file = Path(os.path.dirname(os.path.realpath(__file__))) / 'data/stop
 
 def read_data_files():
     """Load necessary data from data files.
-    
+
     Returns
     -------
     vocab: Dict
@@ -36,7 +36,7 @@ def read_data_files():
 
 def write_data_files(vocab: Dict, wikidata: Dict, stop_words: set, doc_bins_bytes: Dict):
     """Writes necessary data to resource files.
-    
+
     Parameters
     ----------
     vocab: Dict
@@ -66,23 +66,23 @@ def name_split(name: str):
     ----------
     name : str
         name of the waterbody eg 'amazon riverbasin'
-    
+
     Returns
     -------
     names : Tuple
-        all possible variations of name 
+        all possible variations of name
         eg ('amazon riverbasin', 'amazon')
     """
 
     s = name.lower()
-    tokens = ['river', 'lake', 'basin']
+    tokens = ['river', 'lake', 'basin', 'ocean']
     for token in tokens:
         s = s.replace(token, "")
     return s.strip()
 
 def build_vocab(water_bodies: Dict, nlp: Language):
     """Load new vocab and wikidata.
-    
+
     Parameters
     ----------
     water_bodies : Dict
@@ -107,18 +107,18 @@ def build_vocab(water_bodies: Dict, nlp: Language):
         for wb, _ in tqdm(water_bodies[key], desc=f'Loading {key}(s)'):
             doc_bin.add(nlp(wb))
         doc_bins_bytes[key] = doc_bin.to_bytes()
-        
+
         if key not in wikidata:
             wikidata[key] = {}
         for name, id in water_bodies[key]:
             wikidata[key][name.lower()] = id
-        
+
         vocab[str(nlp.vocab.strings[key])] = key
     write_data_files(vocab, wikidata, stop_words, doc_bins_bytes)
 
 def build_vocab_csvs(nlp: Language, data_dir: Path = data_dir):
     """Load data from csv files.
-    
+
     Parameters
     ----------
     nlp : Language
@@ -130,12 +130,12 @@ def build_vocab_csvs(nlp: Language, data_dir: Path = data_dir):
             Filename should be wikidata_{water_body_type}s.csv
             For example wikidata_rivers.csv
     """
-    
+
     water_bodies = {}
-    
+
     files = data_dir.glob('wikidata_*s.csv')
     files = [str(f) for f in files]
-    
+
     for file in files:
         wb_type = file.split('wikidata_')[1].split('s.csv')[0].upper()
         water_bodies[wb_type] = []
@@ -144,6 +144,6 @@ def build_vocab_csvs(nlp: Language, data_dir: Path = data_dir):
             if (type(df['Name'][i]) is str and
             len(df['Name'][i]) > 1 and
             (not re.search('^Q[0-9]+', df['Name'][i]))):
-                name = name_split(df['Name'][i]) 
+                name = name_split(df['Name'][i])
                 water_bodies[wb_type].append((name, df['ID'][i]))
     build_vocab(water_bodies, nlp)

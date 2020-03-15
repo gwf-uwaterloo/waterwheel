@@ -1,6 +1,7 @@
 import unittest
 import spacy
 from waterwheel import WaterWheel
+from util import *
 
 class TestWaterWheel(unittest.TestCase):
     @classmethod
@@ -33,19 +34,19 @@ class TestWaterWheel(unittest.TestCase):
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
 
-        doc = self.nlp('This image of the Pacific Ocean seafloor and land elevations was created by the World Data Center.')
+        doc = self.nlp('This image of the Pacific Ocean seafloor and PACIFIC ocean was created by the World Data Center.')
         self.assertEqual(str(doc.ents[0]), 'Pacific Ocean')
         self.assertEqual(str(doc.ents[0].label_), 'OCEAN')
-        doc = self.nlp('This image of the Pacific Ocean seafloor and land elevations was created by the World Data Center.')
-        self.assertEqual(str(doc.ents[0]), 'pacific sea')
-        self.assertEqual(str(doc.ents[0].label_), 'OCEAN')
+        self.assertEqual(str(doc.ents[1]), 'PACIFIC ocean')
+        self.assertEqual(str(doc.ents[1].label_), 'OCEAN')
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
 
-        doc = self.nlp('Manitoba is bordered by Ontario.')
-        self.assertEqual(str(doc.ents[0]), 'Manitoba')
+        text = 'Province of Ontario is something and ONTARIO is something else'
+        doc = self.nlp(text)
+        self.assertEqual(str(doc.ents[0]), 'Ontario')
         self.assertEqual(str(doc.ents[0].label_), 'PROVINCE')
-        self.assertEqual(str(doc.ents[1]), 'Ontario')
+        self.assertEqual(str(doc.ents[1]), 'ONTARIO')
         self.assertEqual(str(doc.ents[1].label_), 'PROVINCE')
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
@@ -65,15 +66,6 @@ class TestWaterWheel(unittest.TestCase):
         self.assertEqual(str(doc.ents[0].label_), 'LAKE')
         self.assertEqual(str(doc.ents[1]), 'river Thames')
         self.assertEqual(str(doc.ents[1].label_), 'RIVER')
-        for ent in doc.ents:
-            self.assertIsNotNone(ent._.wikilink)
-
-        text = 'The Pacific has double the area and more than double the water volume of the Atlantic Ocean'
-        doc = self.nlp(text)
-        self.assertEqual(str(doc.ents[0]), 'Pacific')
-        self.assertEqual(str(doc.ents[0].label_), 'OCEAN')
-        self.assertEqual(str(doc.ents[1]), 'Atlantic Ocean')
-        self.assertEqual(str(doc.ents[1].label_), 'OCEAN')
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
 
@@ -121,13 +113,31 @@ class TestWaterWheel(unittest.TestCase):
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
 
-        doc = self.nlp(' Eastern boundary of Yukon mostly follows the divide between the Yukon River Basin and the Mackenzie River watershed.')
+        doc = self.nlp(' Eastern boundary of Yukon mostly follows the divide between the Yukon River and the Mackenzie River.')
         self.assertEqual(str(doc.ents[0]), 'Yukon')
         self.assertEqual(str(doc.ents[0].label_), 'PROVINCE')
         self.assertEqual(str(doc.ents[1]), 'Yukon River')
         self.assertEqual(str(doc.ents[1].label_), 'RIVER')
         self.assertEqual(str(doc.ents[2]), 'Mackenzie River')
         self.assertEqual(str(doc.ents[2].label_), 'RIVER')
+        for ent in doc.ents:
+            self.assertIsNotNone(ent._.wikilink)
+
+        text = 'Pacific and Indian Ocean are two important waterbodies in the world.'
+        doc = self.nlp(text)
+        self.assertEqual(str(doc.ents[0]), 'Pacific')
+        self.assertEqual(str(doc.ents[0].label_), 'OCEAN')
+        self.assertEqual(str(doc.ents[1]), 'Indian Ocean')
+        self.assertEqual(str(doc.ents[1].label_), 'OCEAN')
+        for ent in doc.ents:
+            self.assertIsNotNone(ent._.wikilink)
+
+        text = 'The treaty between Ontario and Quebec were established.'
+        doc = self.nlp(text)
+        self.assertEqual(str(doc.ents[0]), 'Ontario')
+        self.assertEqual(str(doc.ents[0].label_), 'PROVINCE')
+        self.assertEqual(str(doc.ents[1]), 'Quebec')
+        self.assertEqual(str(doc.ents[1].label_), 'PROVINCE')
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
 
@@ -145,10 +155,57 @@ class TestWaterWheel(unittest.TestCase):
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
 
+        text = 'Is Ontario Lake a province or a lake?'
+        doc = self.nlp(text)
+        self.assertEqual(str(doc.ents[0]), 'Ontario')
+        self.assertEqual(str(doc.ents[0].label_), 'PROVINCE')
+        for ent in doc.ents:
+            self.assertIsNotNone(ent._.wikilink)
+
+        text = 'Is Lake Ontario Lake a province or a lake?'
+        doc = self.nlp(text)
+        self.assertEqual(str(doc.ents[0]), 'Lake Ontario')
+        self.assertEqual(str(doc.ents[0].label_), 'LAKE')
+        for ent in doc.ents:
+            self.assertIsNotNone(ent._.wikilink)
+
+        text = 'Is arctic wolf an animal in Arctic?'
+        doc = self.nlp(text)
+        self.assertEqual(str(doc.ents[0]), 'Arctic')
+        self.assertEqual(str(doc.ents[0].label_), 'OCEAN')
+        for ent in doc.ents:
+            self.assertIsNotNone(ent._.wikilink)
+
+        text = 'Is Arctic wolf an animal in Arctic?'
+        doc = self.nlp(text)
+        self.assertEqual(str(doc.ents[0]), 'Arctic')
+        self.assertEqual(str(doc.ents[0].label_), 'OCEAN')
+        self.assertEqual(str(doc.ents[1]), 'Arctic')
+        self.assertEqual(str(doc.ents[1].label_), 'OCEAN')
+        for ent in doc.ents:
+            self.assertIsNotNone(ent._.wikilink)
+
+        text = 'Is Arctic wolf an animal in ocean arctic?'
+        doc = self.nlp(text)
+        self.assertEqual(str(doc.ents[0]), 'Arctic')
+        self.assertEqual(str(doc.ents[0].label_), 'OCEAN')
+        self.assertEqual(str(doc.ents[1]), 'ocean arctic')
+        self.assertEqual(str(doc.ents[1].label_), 'OCEAN')
+        for ent in doc.ents:
+            self.assertIsNotNone(ent._.wikilink)
+
     def test_left_priority(self):
         text = 'Is Great Slave Lake Ontario related?'
         doc = self.nlp(text)
         self.assertEqual(str(doc.ents[0]), 'Great Slave Lake')
+        self.assertEqual(str(doc.ents[0].label_), 'LAKE')
+        self.assertEqual(len(doc.ents), 1)
+        for ent in doc.ents:
+            self.assertIsNotNone(ent._.wikilink)
+
+        text = 'Is Arctic Lake Ontario related?'
+        doc = self.nlp(text)
+        self.assertEqual(str(doc.ents[0]), 'Arctic Lake')
         self.assertEqual(str(doc.ents[0].label_), 'LAKE')
         self.assertEqual(len(doc.ents), 1)
         for ent in doc.ents:
