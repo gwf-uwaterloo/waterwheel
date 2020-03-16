@@ -39,10 +39,15 @@ class WaterWheel(EntityRuler):
         self._stop_words = set()
         self._wikidata = {}
         self._doc_bins = {}
+        self._qualifiers = defaultdict(lambda: [])
         # if a match without a qualifier can be of multiple potential types then
         # this is used to set priority.
-        self._pq = {label: iter for iter, label in 
-            enumerate(['RIVER', 'LAKE', 'DRAINAGEBASIN', 'WATERCOURSE', 'WATER_BODY'])}
+        self._pq = {
+            label: iter for iter, label in enumerate([
+                'OCEAN', 'CANADIAN_PROVINCE', 'RIVER', 
+                'LAKE', 'DRAINAGEBASIN', 'WATERCOURSE', 
+                'WATER_BODY'
+        ])}
         self.from_disk(DOC_BIN_FILE)
         Span.set_extension('wikilink', default=None, force=True)
 
@@ -64,29 +69,34 @@ class WaterWheel(EntityRuler):
             doc.ents = []
         matches = list(self.phrase_matcher(doc))
         matches = sorted([(start, end, self._ent_ids[m_id]) for m_id, start, end in matches if start != end])
-        current_range = set()
-        match_groups = []
+        match_dicts = []
+        # stick together qualifiers with matcher wherever possible.
         for start, end, label in matches:
             if any(t.ent_type for t in doc[start:end]) and not self.overwrite:
                 continue
             match_str = str(doc[start:end])
-            is_improper_noun = re.search('^[\sA-Z]+$', match_str) or re.search('^[\sa-z]+$', match_str)
-            is_improper_noun = is_improper_noun is not None
+            is_all_caps = re.search('^[\sA-Z]+$', match_str) is not None
+            is_all_lower =  re.search('^[\sa-z]+$', match_str) is not None
+            is_improper_noun = is_all_caps or is_all_lower
             is_stop_word = match_str.lower() in self._stop_words
-            q_before = str(doc[start-1:start]).lower() == label.lower()
-            q_after = str(doc[end:end+1]).lower() == label.lower()
+            q_before = str(doc[start-1:start]).lower() in self._qualifiers[label]
+            q_after = str(doc[end:end+1]).lower() in self._qualifiers[label]
             end += q_after
             # precedence given to proceeding qualifier over preceding one.
             start -= q_before and not q_after
-            if not (q_before or q_after) and (is_stop_word or is_improper_noun):
-                # skip stop_words/improper nouns wihtout qualifiers.
-                continue
-            if start in current_range or end - 1 in current_range:
-                current_range.update(range(start, end))
-            else:
-                current_range = set(range(start, end))
-                match_groups.append([])
-            match_groups[-1].append({
+            # prelimenary filters
+            if not (q_before or q_after):
+                # skip unqualified/improper/stop_words
+                # unless it is province abbreviation
+                if label == 'CANADIAN_PROVINCE':
+                    # all abbreviations are 4 chars or less.
+                    if is_all_caps and len(match_str) < 5:
+                        pass
+                    elif is_stop_word or is_improper_noun:
+                        continue
+                elif is_stop_word or is_improper_noun:
+                    continue
+            match_dicts.append({
                 'match_str': match_str,
                 'start': start, 
                 'end': end, 
@@ -97,7 +107,20 @@ class WaterWheel(EntityRuler):
                 'length': end - start,
                 'priority': self._pq[label]
             })
+        match_dicts = sorted(match_dicts, key = lambda x: x['start'])
+        current_range = set()
+        match_groups = []
+        # arrange the matches in overlapping groups.
+        for match in match_dicts:
+            if match['start'] in current_range or match['end'] - 1 in current_range:
+                current_range.update(range(match['start'], match['end']))
+            else:
+                current_range = set(range(match['start'], match['end']))
+                match_groups.append([])
+            match_groups[-1].append(match)
+        # filter out best matches in each group.
         final_matches = self._filter_matches(match_groups)
+        # set wikilinks to final matches.
         for match in final_matches:
             span = Span(doc, match['start'], match['end'], label = match['label'])
             span._.set(
@@ -281,6 +304,7 @@ class WaterWheel(EntityRuler):
             vocab = cfg.get('vocab', {})
             for hash, label in vocab.items():
                 self._ent_ids[int(hash)] = label
+                self._qualifiers[label] = [label.lower(), label.lower()+'s']
             self._stop_words = cfg.get('stop_words', [])
             self._stop_words = set(self._stop_words)
             self._wikidata = cfg.get('wikidata', {})
