@@ -147,7 +147,3 @@ def build_vocab_csvs(nlp: Language, data_dir: Path = data_dir):
                 name = name_split(df['Name'][i])
                 water_bodies[wb_type].append((name, df['ID'][i]))
     build_vocab(water_bodies, nlp)
-
-#import spacy
-#nlp = spacy.load('en_core_web_sm')
-#build_vocab_csvs(nlp)
