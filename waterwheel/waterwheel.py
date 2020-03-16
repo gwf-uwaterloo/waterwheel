@@ -11,7 +11,6 @@ from spacy.pipeline import EntityRuler
 from spacy.tokens import Doc, Span, DocBin
 
 DOC_BIN_FILE = Path(os.path.dirname(os.path.realpath(__file__))) / 'resources/doc_bins.msgpack'
-print (os.path.dirname('resources/doc_bins.msgpack'))
 
 class WaterWheel(EntityRuler):
     """WATERWHEEL (WATERloo Water and Hydrologic Entity Extractor and Linker)
