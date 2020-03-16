@@ -3,6 +3,8 @@
 **WATERWHEEL** (**WATER**loo **W**ater and **H**ydrologic **E**ntity **E**xtractor and **L**inker) is a [spaCy](https://spacy.io/) pipeline component that detects rivers, lakes, and other hydrologic entities, and links these entities to [Wikidata](https://www.wikidata.org/).
 Although an acronym, we typically style the name as WaterWheel to avoid the impression that we're screaming all the time.
 
+**PyPI:** https://pypi.org/project/waterwheel/
+
 ## Simple Usage
 
 WaterWheel is written as a [spaCy module](https://spacy.io/).
