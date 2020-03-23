@@ -75,6 +75,9 @@ class WaterWheel(EntityRuler):
             if any(t.ent_type for t in doc[start:end]) and not self.overwrite:
                 continue
             match_str = str(doc[start:end])
+            is_non_alhbetic = re.search('^[^a-zA-Z\d]+$', match_str) is not None
+            if is_non_alhbetic:
+                continue
             is_all_caps = re.search('^[\sA-Z]+$', match_str) is not None
             is_all_lower =  re.search('^[\sa-z]+$', match_str) is not None
             is_improper_noun = is_all_caps or is_all_lower
@@ -125,7 +128,7 @@ class WaterWheel(EntityRuler):
             span = Span(doc, match['start'], match['end'], label = match['label'])
             span._.set(
                 'wikilink',
-                'https://www.wikidata.org/wiki/' + self._wikidata[match['label']][match['match_str'].lower()]
+                'https://www.wikidata.org/wiki/' + self._wikidata[match['label']].get(match['match_str'].lower())
             )
             try:
                 doc.ents = list(doc.ents) + [span]
