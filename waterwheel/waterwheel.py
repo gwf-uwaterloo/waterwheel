@@ -75,8 +75,8 @@ class WaterWheel(EntityRuler):
             if any(t.ent_type for t in doc[start:end]) and not self.overwrite:
                 continue
             match_str = str(doc[start:end])
-            is_non_alhbetic = re.search('^[^a-zA-Z\d]+$', match_str) is not None
-            if is_non_alhbetic:
+            is_non_alphabetical = re.search('^[^a-zA-Z\d]+$', match_str) is not None
+            if is_non_alphabetical:
                 continue
             is_all_caps = re.search('^[\sA-Z]+$', match_str) is not None
             is_all_lower =  re.search('^[\sa-z]+$', match_str) is not None
