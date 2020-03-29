@@ -200,6 +200,7 @@ class TestWaterWheel(unittest.TestCase):
 
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
+    
     def test_province_abbrebiations(self):
         doc = self.nlp('My address is something, something, on or On or oN.')
         self.assertEqual(len(doc.ents), 0)
@@ -209,6 +210,10 @@ class TestWaterWheel(unittest.TestCase):
 
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
+    
+    def test_nonalphabetic_matches(self):
+        doc = self.nlp('There is no waterbody in this (), ( ) sentence.')
+        self.assertEqual(len(doc.ents), 0)
 
 if __name__ == '__main__':
     unittest.main()

@@ -15,6 +15,10 @@ WHERE
   FILTER (CONTAINS(STR(?item), 
 """
 combinations = [f"Q{n}" for n in range(10, 100)]
+for comb in ["Q17", "Q18", "Q22", "Q181", "Q223", "Q224", "Q225", "Q226"]:
+    if comb in combinations:
+        combinations.remove(comb)
+    combinations.extend([f"{comb}{n}" for n in range(0, 10)])
 waterbodies = {}
 for comb in tqdm(combinations):
     query = subquery + f"'{comb}'))" + "} GROUP BY ?item ?itemLabel ?altLabel"

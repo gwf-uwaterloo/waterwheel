@@ -135,7 +135,7 @@ def build_vocab_csvs(nlp: Language, data_dir: Path = data_dir):
 
     files = data_dir.glob('wikidata_*s.csv')
     files = [str(f) for f in files]
-
+    
     for file in files:
         wb_type = file.split('wikidata_')[1].split('s.csv')[0].upper()
         water_bodies[wb_type] = []
@@ -145,5 +145,7 @@ def build_vocab_csvs(nlp: Language, data_dir: Path = data_dir):
             len(df['Name'][i]) > 1 and
             (not re.search('^Q[0-9]+', df['Name'][i]))):
                 name = name_split(df['Name'][i])
+                if re.search('^[^a-zA-Z\d]+$', name):
+                    continue
                 water_bodies[wb_type].append((name, df['ID'][i]))
     build_vocab(water_bodies, nlp)
