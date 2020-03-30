@@ -75,7 +75,7 @@ def name_split(name: str):
     """
 
     s = name.lower()
-    tokens = ['river', 'lake', 'basin', 'ocean', 'sea']
+    tokens = ['river', 'lake', 'basin', 'ocean', 'sea', 'state']
     for token in tokens:
         s = s.replace(token, "")
     return s.strip()
@@ -135,7 +135,7 @@ def build_vocab_csvs(nlp: Language, data_dir: Path = data_dir):
 
     files = data_dir.glob('wikidata_*s.csv')
     files = [str(f) for f in files]
-    
+
     for file in files:
         wb_type = file.split('wikidata_')[1].split('s.csv')[0].upper()
         water_bodies[wb_type] = []
