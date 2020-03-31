@@ -15,7 +15,7 @@ C = pd.read_csv("H:\\Courses\\RA\\wikidata-water-features\\data\\wikidata_canadi
 O = pd.read_csv("H:\\Courses\\RA\\wikidata-water-features\\data\\wikidata_oceans.csv")
 U = pd.read_csv("H:\\Courses\\RA\\wikidata-water-features\\data\\wikidata_us_states.csv")
 
-wikidata = {"LAKE": {}, "RIVER": {}, "PROVINCE": {}, "OCEAN": {}, "STATE": {}}
+wikidata = {"LAKE": {}, "RIVER": {}, "PROVINCE": {}, "OCEAN": {}, "US_STATE": {}}
 
 for i in range(len(L)):
     if not re.search("^Q[0-9]+", L["Name"][i]):
@@ -31,7 +31,7 @@ for i in range(len(O)):
         wikidata["OCEAN"][O["Name"][i].lower()] = O["ID"][i]
 for i in range(len(U)):
     if not re.search("^Q[0-9]+", U["Name"][i]):
-        wikidata["STATE"][U["Name"][i].lower()] = U["ID"][i]
+        wikidata["US_STATE"][U["Name"][i].lower()] = U["ID"][i]
 
 with open("H:\\Courses\\RA\\wikidata-water-features\\scripts\\hydro_matcher.pkl", "rb") as file:
     vocab, matcher = pickle.load(file)

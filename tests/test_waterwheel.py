@@ -33,9 +33,9 @@ class TestWaterWheel(unittest.TestCase):
         text = 'Mississippi and Michigan are two states. Lake Michigan, Lake Superior.'
         doc = self.nlp(text)
         self.assertEqual(str(doc.ents[0]), 'Mississippi')
-        self.assertEqual(str(doc.ents[0].label_), 'STATE')
+        self.assertEqual(str(doc.ents[0].label_), 'US_STATE')
         self.assertEqual(str(doc.ents[1]), 'Michigan')
-        self.assertEqual(str(doc.ents[1].label_), 'STATE')
+        self.assertEqual(str(doc.ents[1].label_), 'US_STATE')
         self.assertEqual(str(doc.ents[2]), 'Lake Michigan')
         self.assertEqual(str(doc.ents[2].label_), 'LAKE')
         self.assertEqual(str(doc.ents[3]), 'Lake Superior')
@@ -94,9 +94,9 @@ class TestWaterWheel(unittest.TestCase):
         self.assertEqual(str(doc.ents[8]), 'Alberta')
         self.assertEqual(str(doc.ents[8].label_), 'CANADIAN_PROVINCE')
         self.assertEqual(str(doc.ents[9]), 'Mississippi')
-        self.assertEqual(str(doc.ents[9].label_), 'STATE')
+        self.assertEqual(str(doc.ents[9].label_), 'US_STATE')
         self.assertEqual(str(doc.ents[10]), 'Missouri States')
-        self.assertEqual(str(doc.ents[10].label_), 'STATE')
+        self.assertEqual(str(doc.ents[10].label_), 'US_STATE')
 
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
@@ -137,9 +137,9 @@ class TestWaterWheel(unittest.TestCase):
         self.assertEqual(str(doc.ents[11]), 'Michigan')
         self.assertEqual(str(doc.ents[11].label_), 'LAKE')
         self.assertEqual(str(doc.ents[12]), 'Mississippi')
-        self.assertEqual(str(doc.ents[12].label_), 'STATE')
+        self.assertEqual(str(doc.ents[12].label_), 'US_STATE')
         self.assertEqual(str(doc.ents[13]), 'Missouri States')
-        self.assertEqual(str(doc.ents[13].label_), 'STATE')
+        self.assertEqual(str(doc.ents[13].label_), 'US_STATE')
 
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
@@ -189,7 +189,7 @@ class TestWaterWheel(unittest.TestCase):
         text = 'Is Mississippi a state or a river or a lake?'
         doc = self.nlp(text)
         self.assertEqual(str(doc.ents[0]), 'Mississippi')
-        self.assertEqual(str(doc.ents[0].label_), 'STATE')
+        self.assertEqual(str(doc.ents[0].label_), 'US_STATE')
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
 
@@ -210,7 +210,7 @@ class TestWaterWheel(unittest.TestCase):
         text = 'Is Missouri a state or a river or a lake?'
         doc = self.nlp(text)
         self.assertEqual(str(doc.ents[0]), 'Missouri')
-        self.assertEqual(str(doc.ents[0].label_), 'STATE')
+        self.assertEqual(str(doc.ents[0].label_), 'US_STATE')
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
 

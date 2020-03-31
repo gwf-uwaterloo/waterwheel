@@ -27,12 +27,12 @@ fl,Q812
 north dakota,Q1207
 nd,Q1207
 nodak,Q1207
-n. dakota,Q1207
+n dakota,Q1207
 the coyote state,Q1211
 sodak,Q1211
 south dakota,Q1211
 sd,Q1211
-s. dakota,Q1211
+s dakota,Q1211
 the mount rushmore state,Q1211
 wy,Q1214
 wyoming,Q1214
@@ -45,19 +45,15 @@ montana,Q1212
 the grand canyon state,Q816
 arizona,Q816
 az,Q816
-ore.,Q824
 or,Q824
 oregon,Q824
 the beaver state,Q824
 beehive state,Q829
 utah,Q829
 ut,Q829
-mich.,Q1166
 michigan,Q1166
 mi,Q1166
 il,Q1204
-ill.,Q1204
-ills.,Q1204
 the land of lincoln,Q1204
 land of lincoln,Q1204
 prairie state,Q1204
@@ -74,7 +70,6 @@ potato state,Q1221
 nevada,Q1227
 nv,Q1227
 co,Q1261
-colo.,Q1261
 colorado,Q1261
 virginia,Q1370
 old dominion,Q1370
@@ -85,7 +80,6 @@ the ocean state,Q1387
 rhode island,Q1387
 little rhodie,Q1387
 maryland,Q1391
-md.,Q1391
 md,Q1391
 delaware,Q1393
 the first state,Q1393
@@ -98,7 +92,6 @@ ohio,Q1397
 oh,Q1397
 keystone state,Q1400
 pennsylvania,Q1400
-penna.,Q1400
 pa,Q1400
 almost heaven,Q1371
 wv,Q1371
@@ -123,10 +116,8 @@ texas,Q1439
 lone star state,Q1439
 north carolina,Q1454
 nc,Q1454
-s.c.,Q1456
 south carolina,Q1456
 sc,Q1456
-s. c.,Q1456
 palmetto state,Q1456
 mississippi,Q1494
 ms,Q1494
@@ -155,7 +146,6 @@ la,Q1588
 18th state,Q1588
 ky,Q1603
 kentucky,Q1603
-ark.,Q1612
 arkansas,Q1612
 ar,Q1612
 us-ok,Q1649
