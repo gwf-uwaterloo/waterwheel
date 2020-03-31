@@ -30,7 +30,7 @@ class TestWaterWheel(unittest.TestCase):
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
 
-        text = 'Mississippi and Michigan are two states. Lake Michigan, Superior.'
+        text = 'Mississippi and Michigan are two states. Lake Michigan, Lake Superior.'
         doc = self.nlp(text)
         self.assertEqual(str(doc.ents[0]), 'Mississippi')
         self.assertEqual(str(doc.ents[0].label_), 'STATE')
@@ -38,8 +38,8 @@ class TestWaterWheel(unittest.TestCase):
         self.assertEqual(str(doc.ents[1].label_), 'STATE')
         self.assertEqual(str(doc.ents[2]), 'Lake Michigan')
         self.assertEqual(str(doc.ents[2].label_), 'LAKE')
-        self.assertEqual(str(doc.ents[3]), 'Superior')
-        self.assertEqual(str(doc.ents[3].label_), 'STATE')
+        self.assertEqual(str(doc.ents[3]), 'Lake Superior')
+        self.assertEqual(str(doc.ents[3].label_), 'LAKE')
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
 
