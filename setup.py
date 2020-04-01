@@ -6,7 +6,7 @@ def readme():
         return f.read()
 
 requires = [
-    'spacy>=2.2.0'
+    'spacy==2.2.3'
 ]
 setup(
     name="waterwheel",

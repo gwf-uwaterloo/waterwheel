@@ -1,12 +1,13 @@
 import re
 import os
+import sys
 import srsly
 import pandas as pd
 from pathlib import Path
 from typing import Dict, Tuple
 from tqdm import tqdm
 from collections import OrderedDict
-
+import spacy
 from spacy.tokens import DocBin
 from spacy.language import Language
 
@@ -75,7 +76,7 @@ def name_split(name: str):
     """
 
     s = name.lower()
-    tokens = ['river', 'lake', 'basin', 'ocean', 'sea']
+    tokens = ['river', 'lake', 'basin', 'ocean', 'sea', 'mount', 'mountain']
     for token in tokens:
         s = s.replace(token, "")
     return s.strip()
@@ -149,3 +150,10 @@ def build_vocab_csvs(nlp: Language, data_dir: Path = data_dir):
                     continue
                 water_bodies[wb_type].append((name, df['ID'][i]))
     build_vocab(water_bodies, nlp)
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        exit("Not enough arguments")
+    if sys.argv[1] == "rebuild":
+        nlp = spacy.load('en_core_web_sm')
+        build_vocab_csvs(nlp)
