@@ -1,1149 +1,1531 @@
 Name,ID
-guinea,Q1006
-gui,Q1006
-,Q1006
-republique de guinee,Q1006
-rpublique de guine,Q1006
-gn,Q1006
-guinea-conakry,Q1006
-republic of guinea,Q1006
- ,Q1006
-   ,Q1006
-gw,Q1007
-republic of guinea-bissau,Q1007
-,Q1007
-guinea-bissau,Q1007
-gbs,Q1007
-gambia,Q1005
-republic of the gambia,Q1005
-gm,Q1005
-,Q1005
-islamic republic of the gambia,Q1005
-gam,Q1005
-the gambia,Q1005
-cte d'ivorie,Q1008
-cote divoire,Q1008
-cte-d'ivoire,Q1008
-cte divoire,Q1008
-republic of cote d'ivoire,Q1008
-republic of cte d'ivoire,Q1008
-ivory coast,Q1008
-,Q1008
-republic of the ivory coast,Q1008
-cote d'ivoire,Q1008
-cote d'lvoire,Q1008
-cte divoire,Q1008
-rpublique de cte d'ivoire,Q1008
-ci,Q1008
-the ivory coast,Q1008
-cote divoire,Q1008
-cote ivoire,Q1008
-cote d'ivore,Q1008
-cte d'ivoire,Q1008
-cote d ivoire,Q1008
-cte divoire,Q1008
-cote divoire,Q1008
-cote d' ivoire,Q1008
-republic of ivory coast,Q1008
-civ,Q1008
-cote-d'ivoire,Q1008
-cpv,Q1011
-republic of cape verde,Q1011
-cv,Q1011
-cape verde,Q1011
-,Q1011
-cabo verde,Q1011
-cm,Q1009
-cameroon,Q1009
-republic of cameroon,Q1009
-,Q1009
-cam,Q1009
-cmr,Q1009
-les,Q1013
-lesotho,Q1013
-ls,Q1013
-kingdom of lesotho,Q1013
-,Q1013
-republic of liberia,Q1014
-liberia,Q1014
-lr,Q1014
-,Q1014
-lbr,Q1014
-,Q1019
-mg,Q1019
-republic of madagascar,Q1019
-madagascar,Q1019
-mad,Q1019
-libya,Q1016
-ly,Q1016
-lba,Q1016
-state of libya,Q1016
-,Q1016
-mw,Q1020
-maw,Q1020
-,Q1020
-malawi,Q1020
-republic of malawi,Q1020
-moris,Q1027
-,Q1027
-republic of mauritius,Q1027
-mauritius,Q1027
-mri,Q1027
-maurice,Q1027
-mu,Q1027
-mtn,Q1025
-gannaar,Q1025
-gnnaar,Q1025
-mr,Q1025
-muritanya,Q1025
-,Q1025
-murutaane,Q1025
-agawej,Q1025
-islamic republic of mauritania,Q1025
-mauritania,Q1025
-moritani,Q1025
-namibia,Q1030
-na,Q1030
-republic of namibia,Q1030
-,Q1030
-nam,Q1030
-mar,Q1028
-marocco,Q1028
-maroc,Q1028
-al-marib,Q1028
-arab maghreb,Q1028
-lmarib,Q1028
-kingdom of morocco,Q1028
-morocco,Q1028
-ma,Q1028
-,Q1028
-moambique,Q1029
-repblica de moambique,Q1029
-republic of mozambique,Q1029
-,Q1029
-moz,Q1029
-mozambique,Q1029
-mz,Q1029
-the niger,Q1032
-republic of the niger,Q1032
-republic of niger,Q1032
-,Q1032
-niger,Q1032
-ne,Q1032
-republic niger,Q1032
-federal republic of nigeria,Q1033
-naija,Q1033
-,Q1033
-nigeria,Q1033
-ngr,Q1033
-nga,Q1033
-frn,Q1033
-ng,Q1033
-uganda,Q1036
-,Q1036
-uga,Q1036
-ug,Q1036
-republic of uganda,Q1036
-st,Q1039
-democratic republic of so tom and prncipe,Q1039
-,Q1039
-so tom and prncipe,Q1039
-stp,Q1039
-so tom og prncipe,Q1039
-sao tome & principe,Q1039
-sao tome and principe,Q1039
-republic of rwanda,Q1037
-,Q1037
-rwanda,Q1037
-rw,Q1037
-sn,Q1041
-rpublique du sngal,Q1041
-republique du senegal,Q1041
-sen,Q1041
-sngal,Q1041
-senegal,Q1041
-republic of senegal,Q1041
-,Q1041
-sey,Q1042
-sc,Q1042
-republic of seychelles,Q1042
-seychelles,Q1042
-,Q1042
-sle,Q1044
-sierra leone,Q1044
-,Q1044
-sl,Q1044
-republic of sierra leone,Q1044
-a-ml,Q1045
-soomaaliya,Q1045
-somalia,Q1045
-som,Q1045
-so,Q1045
-,Q1045
-federal republic of somalia,Q1045
-,Q1050
-swz,Q1050
-umbuso weswatini,Q1050
-sz,Q1050
-swaziland,Q1050
-kingdom of eswatini,Q1050
-kingdom of swaziland,Q1050
-eswatini,Q1050
-sd,Q1049
-,Q1049
-sudan,Q1049
-north sudan,Q1049
-sud,Q1049
-as-sdn,Q1049
-the sudan,Q1049
-republic of sudan,Q1049
-republic of the sudan,Q1049
-rattanakosin kingdom,Q1155700
-rattanakosin kingdom (17821932),Q1155700
-gh,Q117
-ghana,Q117
-gha,Q117
-,Q117
-republic of ghana,Q117
-ke,Q114
-ken,Q114
-kenya,Q114
-,Q114
-republic of kenya,Q114
-et,Q115
-federal democratic republic of ethiopia,Q115
-,Q115
-ethiopia,Q115
-eth,Q115
-polska ludowa,Q11165755
-great mongol nation,Q12557
-mongolian empire,Q12557
-mongol empire,Q12557
-kingdom of aksum,Q139377
-kingdom of axum,Q139377
-aksumite empire,Q139377
-,Q145
-united kingdom of great britain and northern ireland,Q145
-u.k.,Q145
-gbr,Q145
-united kingdom,Q145
-uk,Q145
-england,Q21
-scotland,Q22
+zaf,Q258
+rsa,Q258
+republic of south africa,Q258
+za,Q258
+sa,Q258
+,Q258
+south africa,Q258
+,Q262
+algeria,Q262
+dz,Q262
+peoples democratic republic of algeria,Q262
+alg,Q262
+noreg,Q20
+kingdom of norway,Q20
+nor,Q20
+norvge,Q20
+no,Q20
+norge,Q20
+,Q20
+norway,Q20
+norwegen,Q20
+irl,Q27
+republic of ireland,Q27
+eire,Q27
+southern ireland,Q27
+ie,Q27
+ireland; republic of,Q27
+,Q27
 ireland,Q27
-England and Wales,Q1156248
-chn,Q148
-cn,Q148
-people's republic of china,Q148
-communist china,Q148
-,Q148
-china,Q148
-pr china,Q148
-prc,Q148
-bra,Q155
-federativa repblica do brasil,Q155
-repblica federativa do brasil,Q155
-brazil,Q155
-br,Q155
-estados unidos del brazil,Q155
-federative republic of brazil,Q155
-republic federative of brasil,Q155
-,Q155
-republica federativa do brasil,Q155
-federativa republica do brasil,Q155
-brasil,Q155
-commonwealth of the northern maria islands,Q16644
-cnmi,Q16644
-nmi,Q16644
-,Q16644
-northern mariana islands,Q16644
-mp,Q16644
-american samoa,Q16641
-as,Q16641
-,Q16641
-east samoa,Q16641
-asa,Q16641
-us samoa,Q16641
-territory of american samoa,Q16641
-u.s. samoa,Q16641
-samoa (american),Q16641
+hibernia,Q27
+ire,Q27
+canada,Q16
 cdn,Q16
 british north america,Q16
-can,Q16
 dominion of canada,Q16
-,Q16
 ca,Q16
-canada,Q16
-nihon-koku,Q17
-jap,Q17
+can,Q16
+,Q16
+jp,Q17
+land of the rising sun,Q17
 nippon-koku,Q17
 nippon,Q17
 ja,Q17
-jpn,Q17
-state of japan,Q17
-land of the rising sun,Q17
-nihon,Q17
 japan,Q17
-jp,Q17
-germany,Q183
-de,Q183
-deutschland,Q183
-federal republic of germany,Q183
-brd,Q183
-ger,Q183
-bundesrepublik deutschland,Q183
-frg,Q183
-sovereign military hospitaller order of saint john of jerusalem,Q190353
-sovereign military hospitaller order of saint john of jerusalem; of rhodes; and of malta,Q190353
-knights of order of malta,Q190353
-s.m.o.m.,Q190353
-sovereign order of malta,Q190353
-smom,Q190353
-sovereign military hospitaller order of saint john of jerusalem of rhodes and of malta,Q190353
-order of saint john of jerusalem,Q190353
-sovereign military order of malta,Q190353
-order of malta,Q190353
-no,Q20
-norge,Q20
-nor,Q20
-norway,Q20
-norwegen,Q20
-noreg,Q20
-kingdom of norway,Q20
-,Q20
-norvge,Q20
-sk,Q214
-svk,Q214
-slovakia,Q214
-slovak republic,Q214
-,Q214
-lv,Q211
-republic of latvia,Q211
-lva,Q211
-latvia,Q211
-latvian republic,Q211
-latvija,Q211
-,Q211
-lat,Q211
-r,Q213
-cz,Q213
-czr,Q213
-,Q213
-czech republic,Q213
-esko,Q213
-cze,Q213
-czechia,Q213
-esk republika,Q213
-romnia,Q218
-roumania,Q218
-romania,Q218
-,Q218
-ro,Q218
-rumania,Q218
-bg,Q219
-,Q219
-bulgaria,Q219
-bul,Q219
-bgr,Q219
-republic of bulgaria,Q219
-croatia,Q224
-,Q224
-cro,Q224
-republic of croatia,Q224
-hrv,Q224
-hr,Q224
-republic of kazakhstan,Q232
-,Q232
-kaz,Q232
-kz,Q232
-qazaqstan,Q232
-kazakhstan,Q232
-me,Q236
-montenegro,Q236
-,Q236
-mne,Q236
-kingdom of tibet,Q2444884
-tibet,Q2444884
-artsakh,Q244165
-republic of artsakh,Q244165
-nkr,Q244165
-nagorno-karabakh republic,Q244165
-kush,Q241790
-kingdom of kush,Q241790
-,Q244
-bb,Q244
-barbados,Q244
-bar,Q244
-republic of south africa,Q258
-rsa,Q258
-south africa,Q258
-,Q258
-zaf,Q258
-sa,Q258
-za,Q258
-cymru,Q25
-wal,Q25
-wls,Q25
-wales,Q25
-republic of indonesia,Q252
-,Q252
-idn,Q252
-id,Q252
-ina,Q252
-indonesia,Q252
-dz,Q262
-algeria,Q262
-,Q262
-alg,Q262
-peoples democratic republic of algeria,Q262
+nihon-koku,Q17
+state of japan,Q17
+jpn,Q17
+nihon,Q17
+jap,Q17
+uzb,Q265
 uz,Q265
 republic of uzbekistan,Q265
-uzb,Q265
 ,Q265
 uzbekistan,Q265
-,Q26988
-ck,Q26988
-cook islands,Q26988
-cok,Q26988
-principate of iberia,Q28055530
-principality of iberia,Q28055530
-medieval muslim algeria,Q2836037
 cl,Q298
-chile,Q298
 repblica de chile,Q298
-republic of chile,Q298
+chile,Q298
 ,Q298
 chi,Q298
+republic of chile,Q298
 republica de chile,Q298
-the netherlands,Q29999
-netherlands,Q29999
-kingdom of the netherlands,Q29999
-,Q29999
-nl,Q29999
-usa,Q30
-united states,Q30
-u. s.,Q30
-america,Q30
-united states of america,Q30
-the usa,Q30
-u.s.a.,Q30
-u.s.,Q30
-us,Q30
-the us,Q30
-us of a,Q30
-the united states of america,Q30
-the united states,Q30
-u. s. a.,Q30
-republic of singapore,Q334
-sgp,Q334
-singapore,Q334
-singapore city,Q334
-,Q334
-sg,Q334
-garden city,Q334
 lion city,Q334
-niu,Q34020
-,Q34020
-niue,Q34020
-nu,Q34020
-danmark,Q35
-metropolitan denmark,Q35
-dk,Q35
-tan,Q35
-denmark,Q35
-den,Q35
-,Q35
-dnk,Q35
-denmark proper,Q35
-dek,Q35
-republic of poland,Q36
-poland,Q36
-pol,Q36
-polska,Q36
-,Q36
-pl,Q36
-italy,Q38
-ita,Q38
-italia,Q38
-,Q38
-it,Q38
-italian republic,Q38
-sui,Q39
-schweiz,Q39
-swiss confederation,Q39
-ch,Q39
-swiss,Q39
-che,Q39
-switzerland,Q39
-suisse,Q39
-svizzera,Q39
-bah,Q398
-bahrain,Q398
-kingdom of bahrain,Q398
-,Q398
-bh,Q398
+singapore city,Q334
+sgp,Q334
+republic of singapore,Q334
+garden city,Q334
+singapore,Q334
+sg,Q334
+,Q334
+aus,Q408
+au,Q408
+commonwealth of australia,Q408
+british colony of australia,Q408
+straya,Q408
 australia,Q408
 ,Q408
-commonwealth of australia,Q408
-straya,Q408
-au,Q408
-aus,Q408
-british colony of australia,Q408
-republic of austria,Q40
-republik sterreich,Q40
-at,Q40
-sterreich,Q40
-,Q40
-aut,Q40
-austria,Q40
-,Q40362
-sadr,Q40362
-sahrawi arab democratic republic,Q40362
-saharaui,Q40362
-ar,Q414
+usa,Q30
+u. s.,Q30
+us,Q30
+america,Q30
+u.s.,Q30
+united states of america,Q30
+the united states of america,Q30
+u.s.a.,Q30
+the usa,Q30
+the states,Q30
+united states,Q30
+the us,Q30
+the united states,Q30
+us of a,Q30
+u. s. a.,Q30
 argentine republic,Q414
-argentina,Q414
-arg,Q414
+ar,Q414
 ,Q414
-peru,Q419
-repblica del per,Q419
-republica del peru,Q419
-republic of peru,Q419
-pe,Q419
+arg,Q414
+argentina,Q414
 ,Q419
-kh,Q424
-kingdom of cambodia,Q424
-cambodia,Q424
-kampuchea,Q424
-campuchia,Q424
-kamboja,Q424
-,Q424
-camboya,Q424
-kambodzha,Q424
-democratic people's republic of korea,Q423
-kp,Q423
-n. korea,Q423
-north korea,Q423
-,Q423
-prk,Q423
-dprk,Q423
-dem. rep. korea,Q423
-,Q43
-turkey,Q43
-tr,Q43
-republic of turkey,Q43
-tur,Q43
-pt,Q45
-,Q45
-portugal,Q45
-portuguese republic,Q45
-nederland,Q55
-the netherlands,Q55
-netherlands,Q55
-netherlands (after 1945),Q55
-nl,Q55
-holland,Q55
-ned,Q55
-,Q55
-democratic republic of east timor,Q574
-tl,Q574
-east timor,Q574
-tls,Q574
-,Q574
-democratic republic of timor-leste,Q574
-timor-leste,Q574
-timor leste,Q574
-td,Q657
-chad,Q657
-umhriyyat td,Q657
-republic of chad,Q657
-cha,Q657
-rpublique du tchad,Q657
- ,Q657
-republique du tchad,Q657
-tchad,Q657
-,Q657
-gum,Q657
-,Q664
-dominion of new zealand,Q664
-nzl,Q664
-nz,Q664
-new zealand,Q664
-aotearoa,Q664
-republic of india,Q668
-bharat,Q668
-in,Q668
-bharatvarsh,Q668
-india,Q668
-,Q668
-ind,Q668
-hindustan,Q668
-tuvalu,Q672
-,Q672
-tv,Q672
-ellice islands,Q672
-tuv,Q672
-,Q683
-independent state of samoa,Q683
-ws,Q683
-samoa,Q683
-western samoa,Q683
-vanuatu,Q686
-,Q686
-vu,Q686
-republic of vanuatu,Q686
-vut,Q686
-van,Q686
-,Q685
-sol,Q685
-sb,Q685
-solomon islands,Q685
-pg,Q691
-independent state of papua new guinea,Q691
-png,Q691
-,Q691
-papua new guinea,Q691
-republic of palau,Q695
-belau,Q695
-pw,Q695
-,Q695
-palau,Q695
-pelew,Q695
-republic of belau,Q695
-,Q697
-pleasant island,Q697
-republic of nauru,Q697
-nr,Q697
-naoero,Q697
-nauru,Q697
-fed. sts. micronesia,Q702
-fsm,Q702
-,Q702
-federated states of micronesia; fsm,Q702
-micronesia,Q702
-fm,Q702
-federated states of micronesia,Q702
-fed. sts. of micronesia,Q702
-mhl,Q709
-,Q709
-mh,Q709
-republic of the marshall islands,Q709
-marshall islands,Q709
-aolepn aorkin maje,Q709
-kiribati,Q710
-kir,Q710
-republic of kiribati,Q710
-ki,Q710
-,Q710
-mgl,Q711
-,Q711
-mongol uls,Q711
-mng,Q711
-mn,Q711
-mongolia,Q711
-republic of fiji,Q712
-fj,Q712
-,Q712
-republic of the fiji islands,Q712
-fij,Q712
-fiji,Q712
-bolivarian republic of venezuela,Q717
-ve,Q717
-,Q717
-ven,Q717
-vzla,Q717
-venezuela,Q717
-estados unidos de venezuela,Q717
-br venezuela,Q717
-republic of guyana,Q734
-gy,Q734
-guyana,Q734
-co-operative republic of guyana,Q734
-,Q734
-guy,Q734
-republic of paraguay,Q733
-,Q733
-py,Q733
-heart of south america,Q733
-paraguay,Q733
-republic of ecuador,Q736
-ec,Q736
-the ecuadorian state,Q736
-ecuador,Q736
-ecu,Q736
-republic of the equator,Q736
-,Q736
-repblica de colombia,Q739
-republica de colombia,Q739
-col,Q739
-colombia,Q739
-,Q739
-cartagena; colombia,Q739
-republic of colombia,Q739
-republic of bolivia,Q750
-plurinational state of bolivia,Q750
-bolivia,Q750
-,Q750
-bo,Q750
-bol,Q750
-tt,Q754
-trinidad and tobago,Q754
-tto,Q754
-republic of trinidad and tobago,Q754
-,Q754
-,Q757
-st vincent and the grenadines,Q757
-saint vincent and the grenadines,Q757
-st. vincent,Q757
-st. vincent and the grenadines,Q757
-st vincent,Q757
-saint vincent,Q757
-vc,Q757
-st. kitts and nevis,Q763
-,Q763
-st. kitts & nevis,Q763
-kn,Q763
-saint kitts and nevis,Q763
-kitts & nevis,Q763
-saint christopher and nevis,Q763
-st kitts and nevis,Q763
-federation of saint kitts and nevis,Q763
-st lucia,Q760
-st. lucia,Q760
-lc,Q760
-saint lucia,Q760
-,Q760
-commonwealth of jamaica,Q766
-jamaica,Q766
-,Q766
-jam,Q766
-ja,Q766
-jm,Q766
-grenada,Q769
-,Q769
-gd,Q769
-grn,Q769
-republic of guatemala,Q774
-,Q774
-guatemala,Q774
-gt,Q774
-gua,Q774
-bs,Q778
+republica del peru,Q419
+repblica del per,Q419
+republic of peru,Q419
+peru,Q419
+pe,Q419
+spain,Q29
+es,Q29
+kingdom of spain,Q29
+,Q29
+espaa,Q29
+esp,Q29
 ,Q778
 bahama islands,Q778
 bahamas,Q778
 commonwealth of the bahamas,Q778
 the bahamas,Q778
-uruguay,Q77
-uy,Q77
-repblica oriental del uruguay,Q77
-uru,Q77
-,Q77
-republica oriental del uruguay,Q77
-republic of honduras,Q783
-,Q783
-hon,Q783
+bs,Q778
+hn,Q783
 honduran republic,Q783
 honduras,Q783
-hn,Q783
-antigua and barbuda,Q781
-ant,Q781
-,Q781
+,Q783
+republic of honduras,Q783
+hon,Q783
 ag,Q781
-republica dominicana,Q786
-dominican republic,Q786
-repblica dominicana,Q786
-rd,Q786
-dr,Q786
-,Q786
+antigua and barbuda,Q781
+,Q781
+ant,Q781
+the commonwealth of dominica,Q784
 dma,Q784
 dominica,Q784
-dom,Q784
 commonwealth of dominica,Q784
-dm,Q784
 ,Q784
-the commonwealth of dominica,Q784
-jumhriyyat al-irq,Q796
-iraq,Q796
-komar-i raq,Q796
-al-irq,Q796
-irq,Q796
-,Q796
-republic of iraq,Q796
-iq,Q796
-rpublique d'hati,Q790
+dm,Q784
+dom,Q784
+repblica dominicana,Q786
+rd,Q786
+republica dominicana,Q786
+dominican republic,Q786
+,Q786
+dr,Q786
 haitian republic,Q790
-ayiti,Q790
-,Q790
+hayti,Q790
 hai,Q790
 ht,Q790
-haiti,Q790
-hayti,Q790
+,Q790
 republic of haiti,Q790
-arab republic of egypt,Q79
-eg,Q79
-rep. egypt,Q79
-arab rep. egypt,Q79
-republic of egypt,Q79
-egy,Q79
-,Q79
-egypt,Q79
-persia,Q794
-republic of iran,Q794
-islamic rep. iran,Q794
-ir,Q794
-islamic republic of iran,Q794
-iran,Q794
-,Q794
+ayiti,Q790
+haiti,Q790
+rpublique d'hati,Q790
+el salvador,Q792
 sv,Q792
-,Q792
 esa,Q792
 republic of el salvador,Q792
-el salvador,Q792
-crc,Q800
-cr,Q800
+fl,Q347
+li,Q347
+liechtenstein,Q347
+lie,Q347
+,Q347
+principality of liechtenstein,Q347
+bh,Q398
+,Q398
+kingdom of bahrain,Q398
+bah,Q398
+bahrain,Q398
+,Q672
+tv,Q672
+tuv,Q672
+tuvalu,Q672
+ellice islands,Q672
+kingdom of tonga,Q678
+to,Q678
+tonga,Q678
+tga,Q678
+,Q678
+bel,Q31
+,Q31
+belgium,Q31
+kingdom of belgium,Q31
+be,Q31
+kp,Q423
+prk,Q423
+north korea,Q423
+dem. rep. korea,Q423
+dprk,Q423
+democratic people's republic of korea,Q423
+,Q423
+n. korea,Q423
+,Q668
+in,Q668
+hindustan,Q668
+india,Q668
+bharatvarsh,Q668
+ind,Q668
+bharat,Q668
+republic of india,Q668
+jamaica,Q766
+commonwealth of jamaica,Q766
+jam,Q766
+,Q766
+ja,Q766
+jm,Q766
+grn,Q769
+gd,Q769
+grenada,Q769
+,Q769
+gt,Q774
+guatemala,Q774
+,Q774
+republic of guatemala,Q774
+gua,Q774
+luxemburg,Q32
+grand duchy of luxembourg,Q32
+lu,Q32
+,Q32
+luxembourg,Q32
+lux,Q32
+kamboja,Q424
+,Q424
+kambodzha,Q424
+kingdom of cambodia,Q424
+camboya,Q424
+cambodia,Q424
+kh,Q424
+kampuchea,Q424
+campuchia,Q424
+east timor,Q574
+democratic republic of timor-leste,Q574
+tls,Q574
+democratic republic of east timor,Q574
+timor leste,Q574
+timor-leste,Q574
+,Q574
+tl,Q574
+,Q697
+nr,Q697
+nauru,Q697
+naoero,Q697
+republic of nauru,Q697
+pleasant island,Q697
+fsm,Q702
+federated states of micronesia,Q702
+fed. sts. of micronesia,Q702
+federated states of micronesia; fsm,Q702
+,Q702
+micronesia,Q702
+fed. sts. micronesia,Q702
+fm,Q702
+republic of the marshall islands,Q709
+marshall islands,Q709
+aolepn aorkin maje,Q709
+mh,Q709
+,Q709
+mhl,Q709
+iran,Q794
+persia,Q794
+islamic rep. iran,Q794
+,Q794
+ir,Q794
+islamic republic of iran,Q794
+republic of iran,Q794
+swe,Q34
+se,Q34
+sweden,Q34
+kingdom of sweden,Q34
+dnk,Q35
+,Q35
+metropolitan denmark,Q35
+danmark,Q35
+denmark proper,Q35
+denmark,Q35
+den,Q35
+dek,Q35
+dk,Q35
+tan,Q35
+armenia,Q399
+,Q399
+arm,Q399
+republic of armenia,Q399
+srb,Q403
+rs,Q403
+,Q403
+serbia,Q403
+republika srbija,Q403
+srbija,Q403
+republic of serbia,Q403
+the jewish state,Q801
+il,Q801
+holy land,Q801
+isr,Q801
+israel,Q801
+,Q801
+state of israel,Q801
+hungary,Q28
+,Q28
+hun,Q28
+hu,Q28
+ws,Q683
+,Q683
+samoa,Q683
+western samoa,Q683
+independent state of samoa,Q683
+vanuatu,Q686
+,Q686
+vut,Q686
+vu,Q686
+van,Q686
+republic of vanuatu,Q686
+solomon islands,Q685
+sol,Q685
+,Q685
+sb,Q685
 ,Q800
-republic of costa rica,Q800
 costa rica,Q800
+republic of costa rica,Q800
 cri,Q800
-yem,Q805
+cr,Q800
+crc,Q800
+republic of chad,Q657
+td,Q657
+cha,Q657
+gum,Q657
+,Q657
+chad,Q657
+,Q664
+aotearoa,Q664
+nz,Q664
+new zealand,Q664
+dominion of new zealand,Q664
+nzl,Q664
+la,Q819
+lao people's democratic republic,Q819
+lao pdr,Q819
+,Q819
+laos,Q819
+lao,Q819
+kuwait,Q817
+,Q817
+kw,Q817
+kuw,Q817
+state of kuwait,Q817
+bolivarian republic of venezuela,Q717
+br venezuela,Q717
+,Q717
+vzla,Q717
+venezuela,Q717
+ven,Q717
+ve,Q717
+estados unidos de venezuela,Q717
+republic of suriname,Q730
+surinam,Q730
+dutch guiana,Q730
+sur,Q730
+sr,Q730
+suriname,Q730
+,Q730
+republic of surinam,Q730
+fi,Q33
+republiken finland,Q33
+fin,Q33
+finnia,Q33
+republic of finland,Q33
+,Q33
+suomen tasavalta,Q33
+finlandia,Q33
+land of thousand lakes,Q33
+suomi,Q33
+finlande,Q33
+finnland,Q33
+finland,Q33
+papua new guinea,Q691
+,Q691
+png,Q691
+independent state of papua new guinea,Q691
+pg,Q691
+,Q695
+republic of belau,Q695
+republic of palau,Q695
+pw,Q695
+pelew,Q695
+palau,Q695
+belau,Q695
+poland,Q36
+pl,Q36
+republic of poland,Q36
+pol,Q36
+,Q36
+lb,Q822
+,Q822
+republic of lebanon,Q822
+lebanese republic,Q822
+lebanon,Q822
+lbn,Q822
+,Q826
+mv,Q826
+maldives,Q826
+republic of maldives,Q826
+mdv,Q826
+republic of iraq,Q796
+jumhriyyat al-irq,Q796
+irq,Q796
+,Q796
+komar-i raq,Q796
+al-irq,Q796
+iq,Q796
+iraq,Q796
+np,Q837
+npl,Q837
+,Q837
+federal democratic republic of nepal,Q837
+nep,Q837
+nepal,Q837
+,Q842
+om,Q842
+sultanate of oman,Q842
+oman,Q842
+,Q843
+pak,Q843
+pk,Q843
+pakistan,Q843
+islamic republic of pakistan,Q843
+,Q804
+republic of panama,Q804
+pa,Q804
+panama,Q804
 ye,Q805
 yemen,Q805
 ,Q805
-rep. yemen,Q805
 republic of yemen,Q805
-israel,Q801
-,Q801
-isr,Q801
-il,Q801
-holy land,Q801
-the jewish state,Q801
-state of israel,Q801
-lao,Q819
-laos,Q819
-lao pdr,Q819
-la,Q819
-lao people's democratic republic,Q819
-,Q819
-jordan,Q810
-hashemite kingdom of jordan,Q810
-jo,Q810
-,Q810
+rep. yemen,Q805
+yem,Q805
 kingdom of jordan,Q810
 jor,Q810
-ni,Q811
-nic,Q811
-nca,Q811
-republic of nicaragua,Q811
-nicaragua,Q811
-,Q811
-kyrgyzstan,Q813
-kgz,Q813
-,Q813
-kirgizia,Q813
-kg,Q813
-kyrgyz republic,Q813
-lb,Q822
-lbn,Q822
-republic of lebanon,Q822
-,Q822
-lebanese republic,Q822
-lebanon,Q822
-maldives,Q826
-mv,Q826
-,Q826
-mdv,Q826
-republic of maldives,Q826
-nep,Q837
-federal democratic republic of nepal,Q837
-np,Q837
-npl,Q837
-nepal,Q837
-,Q837
-my,Q833
-malaysia,Q833
-mas,Q833
-federation of malaysia,Q833
-,Q833
-malaysia federation,Q833
-mys,Q833
-union of burma,Q836
-burma,Q836
-republic of the union of myanmar,Q836
-bur,Q836
-mm,Q836
-myanmar,Q836
-,Q836
-mya,Q836
-om,Q842
-sultanate of oman,Q842
-,Q842
-oman,Q842
-islamic republic of pakistan,Q843
-pakistan,Q843
-pk,Q843
-,Q843
-pak,Q843
-qa,Q846
-qatar,Q846
-,Q846
-state of qatar,Q846
-kingdom of saudi arabia,Q851
-ksa,Q851
-,Q851
-sa,Q851
-saudi arabia,Q851
-srilanka,Q854
+jo,Q810
+hashemite kingdom of jordan,Q810
+jordan,Q810
+,Q810
+ecu,Q736
+ecuador,Q736
+republic of the equator,Q736
+republic of ecuador,Q736
+,Q736
+the ecuadorian state,Q736
+ec,Q736
+kiribati,Q710
+,Q710
+kir,Q710
+republic of kiribati,Q710
+ki,Q710
+mongolia,Q711
+mng,Q711
+,Q711
+mgl,Q711
+mongol uls,Q711
+mn,Q711
+fiji,Q712
+republic of the fiji islands,Q712
+fij,Q712
+republic of fiji,Q712
+,Q712
+fj,Q712
+federation of saint kitts and nevis,Q763
+kn,Q763
+st kitts and nevis,Q763
+saint kitts and nevis,Q763
+,Q763
+kitts & nevis,Q763
+st. kitts & nevis,Q763
+st. kitts and nevis,Q763
+saint christopher and nevis,Q763
+saint lucia,Q760
+,Q760
+iyonola,Q760
+hewanorra,Q760
+lc,Q760
+st. lucia,Q760
+st lucia,Q760
+gy,Q734
+republic of guyana,Q734
+,Q734
+guy,Q734
+guyana,Q734
+co-operative republic of guyana,Q734
+paraguay,Q733
+heart of south america,Q733
+py,Q733
+,Q733
+republic of paraguay,Q733
+swiss confederation,Q39
+schweiz,Q39
+switzerland,Q39
+suisse,Q39
+che,Q39
+ch,Q39
+sui,Q39
+swiss,Q39
+svizzera,Q39
+democratic socialist republic of sri lanka,Q854
 lk,Q854
-ce,Q854
-lke,Q854
-ceylon,Q854
-serendib,Q854
-lanka; sri,Q854
-,Q854
+srilanka,Q854
 sri lanka,Q854
+ce,Q854
 sri,Q854
+lanka; sri,Q854
+lke,Q854
+,Q854
+serendib,Q854
 ceylan,Q854
 taprobane,Q854
-democratic socialist republic of sri lanka,Q854
-sy,Q858
-syrian arab republic,Q858
-syr,Q858
-syria,Q858
-ba'athist syria,Q858
-,Q858
-,Q863
-republic of tajikistan,Q863
-tj,Q863
-tajikistan,Q863
-tjk,Q863
-land of smiles,Q869
+ceylon,Q854
+malaysia federation,Q833
+mys,Q833
+malaysia,Q833
+federation of malaysia,Q833
+mas,Q833
+my,Q833
+,Q833
+bur,Q836
+burma,Q836
+mya,Q836
+republic of the union of myanmar,Q836
+myanmar,Q836
+,Q836
+mm,Q836
+union of burma,Q836
+formosa,Q865
+republic of china (taiwan),Q865
+nationalist china,Q865
+free china,Q865
+chunghwa minkuo,Q865
+roc,Q865
+free area of the republic of china,Q865
+,Q865
+republic of china,Q865
+chunghwa minkwo,Q865
+tw,Q865
+chinese taipei,Q865
+taiwan,Q865
 kingdom of thailand,Q869
-thailand,Q869
-,Q869
-th,Q869
-tha,Q869
 siam,Q869
-turkmenia,Q874
-tkm,Q874
-tm,Q874
-turkmenistan,Q874
-,Q874
-united arab emirates,Q878
+thailand,Q869
+land of smiles,Q869
+,Q869
+tha,Q869
+th,Q869
+nicaragua,Q811
+,Q811
+ni,Q811
+nca,Q811
+republic of nicaragua,Q811
+nic,Q811
+kgz,Q813
+kyrgyz republic,Q813
+kirgizia,Q813
+,Q813
+kg,Q813
+kyrgyzstan,Q813
+iraqi kurdistan,Q205047
+southern region of kurdistan,Q205047
+kurdistan region,Q205047
+state of qatar,Q846
+,Q846
+qatar,Q846
+qa,Q846
+saudi arabia,Q851
+kingdom of saudi arabia,Q851
+,Q851
+ksa,Q851
+sa,Q851
 uae,Q878
-,Q878
 the united arab emirates,Q878
-u.a.e.,Q878
-ae,Q878
-the emirates,Q878
+,Q878
 emirates,Q878
+united arab emirates,Q878
+ae,Q878
 the u.a.e.,Q878
+the emirates,Q878
+u.a.e.,Q878
 the uae,Q878
-south korea,Q884
-the republic of great han,Q884
-kr,Q884
-republic of korea,Q884
-rep. korea,Q884
-daehan minguk,Q884
-republic of great han,Q884
-rok,Q884
-republic of south korea,Q884
-korea republic,Q884
-kor,Q884
-s. korea,Q884
-,Q884
-islamic republic of afghanistan,Q889
-af,Q889
-afghanistan,Q889
-,Q889
-afg,Q889
 socialist republic of vietnam,Q881
-,Q881
 vn,Q881
-viet nam,Q881
-vietnam,Q881
 vie,Q881
-nistrenia,Q907112
-cisdniestria,Q907112
-transdniestria,Q907112
-pridnestria,Q907112
-pmr,Q907112
-trans-dniestr,Q907112
-pridnestrovian moldavian republic,Q907112
-pridnestrovia,Q907112
-moldavian republic of transdniestria,Q907112
-transdniestrian moldavian republic,Q907112
-dnestr republic,Q907112
-transnistria,Q907112
-nistria,Q907112
-left bank of dniester,Q907112
-pridnestrovie,Q907112
-transdniester,Q907112
-republic of pridnestrovie,Q907112
-ban,Q902
-bd,Q902
-,Q902
-bangladesh,Q902
-rpublique du mali,Q912
-republique du mali,Q912
-republic of mali,Q912
-mli,Q912
-mali,Q912
-ml,Q912
-,Q912
-angola,Q916
-ngola,Q916
-ao,Q916
-republic of angola,Q916
-ang,Q916
-,Q916
-bhu,Q917
-kingdom of bhutan,Q917
-bhutan,Q917
-bt,Q917
-,Q917
-the philippines,Q928
-philippines,Q928
-philippine islands,Q928
-,Q928
-rp,Q928
-ph,Q928
-republic of the philippines,Q928
-phi,Q928
-phl,Q928
-cf,Q929
-centrafrique,Q929
-car,Q929
-caf,Q929
-,Q929
-rpublique centrafricaine,Q929
-central african republic,Q929
-kdrsse t bafrka,Q929
-republique centrafricaine,Q929
-,Q921
-brn,Q921
-brunei darussalam,Q921
-bn,Q921
-nation of brunei; the abode of peace,Q921
-bru,Q921
-brunei,Q921
-united republic of tanganyika and zanzibar,Q924
-united republic of tanzania,Q924
-,Q924
-tanzania,Q924
-tz,Q924
-republique togolaise,Q945
-tog,Q945
-tg,Q945
-togo,Q945
-togolese republic,Q945
-rpublique togolaise,Q945
-,Q945
-,Q948
-republic of tunisia,Q948
-tnis,Q948
-al-jumhriyyah at-tnisiyyah,Q948
-tunisia,Q948
-tunisian republic,Q948
-tn,Q948
-tun,Q948
-south sudan,Q958
-,Q958
-republic of south sudan,Q958
-southern sudan,Q958
-ssd,Q958
-ss,Q958
-zim,Q954
-zimbabwe rhodesia,Q954
+viet nam,Q881
+,Q881
+vietnam,Q881
+,Q38
+italia,Q38
+it,Q38
+ita,Q38
+italy,Q38
+italian republic,Q38
+austria,Q40
+republik sterreich,Q40
+sterreich,Q40
+aut,Q40
+at,Q40
+republic of austria,Q40
+,Q40
+,Q858
+syria,Q858
+syrian arab republic,Q858
+sy,Q858
+syr,Q858
+republic of tajikistan,Q863
+,Q863
+tjk,Q863
+tajikistan,Q863
+tj,Q863
+republic of lithuania,Q37
+lt,Q37
+lithuania,Q37
+lietuva,Q37
+ltu,Q37
+,Q37
+southern rhodesia,Q954
 ,Q954
 republic of zimbabwe,Q954
+zw,Q954
 rhodesia,Q954
 zimbabwe,Q954
-southern rhodesia,Q954
-zw,Q954
-republic of zambia,Q953
-zm,Q953
-zam,Q953
-zambia,Q953
-,Q953
-benin,Q962
-,Q962
-dahomey,Q962
-bj,Q962
-republic of benin,Q962
-ben,Q962
+zim,Q954
+zimbabwe rhodesia,Q954
+catalan republic,Q138837
+catalan state,Q138837
+catalan republic (2017),Q138837
+french fifth republic,Q200686
+france,Q200686
+greece,Q41
+hellas,Q41
+greek republic,Q41
+el,Q41
+gre,Q41
+gr,Q41
+,Q41
+hellenic republic,Q41
+hungarian people's republic,Q516160
+first hungarian republic,Q516160
+tm,Q874
+tkm,Q874
+turkmenistan,Q874
+turkmenia,Q874
+,Q874
+islamic republic of afghanistan,Q889
+,Q889
+afghanistan,Q889
+af,Q889
+afg,Q889
+ban,Q902
+,Q902
+bd,Q902
+bangladesh,Q902
+people's republic of bangladesh,Q902
+republic of colombia,Q739
+,Q739
+colombia,Q739
+col,Q739
+republica de colombia,Q739
+co,Q739
+repblica de colombia,Q739
+cartagena; colombia,Q739
+the republic of great han,Q884
+republic of korea,Q884
+kor,Q884
+rep. korea,Q884
+,Q884
+kr,Q884
+rok,Q884
+republic of south korea,Q884
+s. korea,Q884
+south korea,Q884
+korea republic,Q884
+republic of great han,Q884
 mexican republic,Q96
 mx,Q96
 ,Q96
-united mexican states,Q96
 mex,Q96
+united mexican states,Q96
 mexico,Q96
-lefatshe la botswana,Q963
-republic of botswana,Q963
-botswana,Q963
-,Q963
-bw,Q963
-bot,Q963
-bdi,Q967
-bi,Q967
-republic of burundi,Q967
-,Q967
-burundi,Q967
-republika y'uburundi,Q967
-gouvernement du burundi,Q967
-,Q965
-burkina faso,Q965
-bf,Q965
-km,Q970
-union des comores,Q970
-al-ittid al-qumur,Q970
-massiwa ya komori,Q970
-udzima wa komori,Q970
-juzur al-qumur,Q970
-,Q970
-comoros,Q970
-ouvoimoja wakomori,Q970
-union of the comoros,Q970
-com,Q970
-juzur al-qamar,Q970
-cg,Q971
-,Q971
-congo-brazzaville,Q971
-rep. congo,Q971
-republique du congo,Q971
-congo (brazzaville),Q971
-republic of congo,Q971
-congo republic,Q971
-rpublique du congo,Q971
-cgo,Q971
-republic of the congo,Q971
-congo,Q974
+cd,Q974
 zaire,Q974
-dr congo,Q974
+congo (kinshasa),Q974
+congo,Q974
+dem. rep. congo,Q974
+dem. republic of the congo,Q974
 drc,Q974
 congo-kinshasa,Q974
-,Q974
-congo (kinshasa),Q974
-dem. republic of the congo,Q974
-cod,Q974
-democratic republic of the congo,Q974
-cd,Q974
-dem. republic of congo,Q974
 democratic republic of congo,Q974
-dem. rep. congo,Q974
-jabuuti,Q977
-,Q977
-djibouti,Q977
-jbt,Q977
-republic of djibouti,Q977
-dj,Q977
-dji,Q977
-gabuuti,Q977
-state of eritrea,Q986
-iritriy,Q986
+dr congo,Q974
+democratic republic of the congo,Q974
+,Q974
+dem. republic of congo,Q974
+cod,Q974
+tunisia,Q948
+republic of tunisia,Q948
+tn,Q948
+tun,Q948
+,Q948
+tunisian republic,Q948
+zambia,Q953
+zm,Q953
+,Q953
+zam,Q953
+republic of zambia,Q953
+artsakh,Q244165
+nkr,Q244165
+nagorno-karabakh republic,Q244165
+republic of artsakh,Q244165
+palestinian state,Q219060
+palestine,Q219060
+state of palestine,Q219060
+palestinian authority,Q219060
+,Q219060
+palestinian national authority,Q219060
+kingdom of araucana and patagonia,Q271570
+kingdom of araucania and patagonia,Q271570
+united kingdom,Q145
+uk,Q145
+u k,Q145
+g b,Q145
+u. k.,Q145
+g.b.r.,Q145
+marea britanie,Q145
+g. b. r.,Q145
+g. b.,Q145
+gbr,Q145
+g b r,Q145
+gb,Q145
+great britain,Q145
+g.b.,Q145
+u.k.,Q145
+united kingdom of great britain and northern ireland,Q145
+,Q145
+repblica federativa do brasil,Q155
+,Q155
+br,Q155
+federativa repblica do brasil,Q155
+estados unidos del brazil,Q155
+brazil,Q155
+federative republic of brazil,Q155
+federativa republica do brasil,Q155
+republica federativa do brasil,Q155
+bra,Q155
+brasil,Q155
+republic federative of brasil,Q155
+fr,Q142
+french republic,Q142
+la france,Q142
+rpublique franaise,Q142
+france,Q142
+republic of france,Q142
+fra,Q142
+republic of kenya,Q114
+ke,Q114
+ken,Q114
+kenya,Q114
+,Q114
+,Q115
+ethiopia,Q115
+et,Q115
+federal democratic republic of ethiopia,Q115
+eth,Q115
 iri,Q986
 ertr,Q986
-eritrea,Q986
+eri,Q986
+state of eritrea,Q986
+iritriy,Q986
 ,Q986
 er,Q986
-eri,Q986
+eritrea,Q986
+republique gabonaise,Q1000
+ga,Q1000
+,Q1000
+gab,Q1000
+gabon,Q1000
+rpublique gabonaise,Q1000
+gabonese republic,Q1000
+gm,Q1005
+gam,Q1005
+islamic republic of the gambia,Q1005
+republic of the gambia,Q1005
+gambia,Q1005
+,Q1005
+the gambia,Q1005
+southern sudan,Q958
+ss,Q958
+ssd,Q958
+republic of south sudan,Q958
+south sudan,Q958
+,Q958
+republic of benin,Q962
+dahomey,Q962
+,Q962
+benin,Q962
+ben,Q962
+bj,Q962
+lefatshe la botswana,Q963
+botswana,Q963
+republic of botswana,Q963
+bot,Q963
+,Q963
+bw,Q963
+tr,Q43
+republic of turkey,Q43
+turkey,Q43
+tur,Q43
+,Q43
+republic of bolivia,Q750
+bo,Q750
+,Q750
+bol,Q750
+bolivia (plurinational state of),Q750
+plurinational state of bolivia,Q750
+bolivia,Q750
+,Q754
+tt,Q754
+tto,Q754
+republic of trinidad and tobago,Q754
+trinidad and tobago,Q754
+trinidad & tobago,Q754
+saint vincent and the grenadines,Q757
+saint vincent,Q757
+st vincent and the grenadines,Q757
+vc,Q757
+,Q757
+st vincent,Q757
+st. vincent and the grenadines,Q757
+st. vincent,Q757
+arab republic of egypt,Q79
+egy,Q79
+republic of egypt,Q79
+egypt,Q79
+eg,Q79
+,Q79
+arab rep. egypt,Q79
+rep. egypt,Q79
+oriental republic of uruguay,Q77
+repblica oriental del uruguay,Q77
+uruguay,Q77
+uy,Q77
+uru,Q77
+,Q77
+,Q756617
+greenland; denmark and the faroe islands,Q756617
+denmark,Q756617
+dk,Q756617
+kingdom of denmark,Q756617
+united republic of tanzania,Q924
+united republic of tanganyika and zanzibar,Q924
+tz,Q924
+,Q924
+tanzania,Q924
+republic of the philippines,Q928
+rp,Q928
+phi,Q928
+the philippines,Q928
+phl,Q928
+philippine islands,Q928
+ph,Q928
+philippines,Q928
+,Q928
+rpublique de guine,Q1006
+republique de guinee,Q1006
+ ,Q1006
+gn,Q1006
+republic of guinea,Q1006
+gui,Q1006
+   ,Q1006
+guinea-conakry,Q1006
+guinea,Q1006
+,Q1006
+gw,Q1007
+republic of guinea-bissau,Q1007
+gbs,Q1007
+guinea-bissau,Q1007
+,Q1007
+state of vermont,Q1649602
+republic of new connecticut,Q1649602
+vermont republic,Q1649602
+new connecticut,Q1649602
+new connecticut republic,Q1649602
+republic of vermont,Q1649602
+basterland,Q2139012
+rehoboth,Q2139012
+alsace-lorraine soviet republic,Q2380231
+soldiers' council of strasbourg,Q2380231
+alsace-lorraine republic of councils,Q2380231
+republic of alsace-lorraine,Q2380231
+alsace soviet republic,Q2380231
+vsevelikoe voisko donskoe,Q2453974
+don republic,Q2453974
+almighty don host,Q2453974
+amba land,Q2842000
+ambazonia,Q2842000
+ambazania,Q2842000
+bhu,Q917
+,Q917
+bhutan,Q917
+bt,Q917
+kingdom of bhutan,Q917
+bn,Q921
+brn,Q921
+,Q921
+brunei,Q921
+bru,Q921
+brunei darussalam,Q921
+nation of brunei; the abode of peace,Q921
+republique centrafricaine,Q929
+car,Q929
+rpublique centrafricaine,Q929
+kdrsse t bafrka,Q929
+,Q929
+cf,Q929
+centrafrique,Q929
+caf,Q929
+central african republic,Q929
+tg,Q945
+togo,Q945
+,Q945
+togolese republic,Q945
+tog,Q945
+bremen council republic,Q907827
+bremen soviet republic,Q907827
+first east turkestan republic,Q986665
+islamic republic of east turkistan,Q986665
+east turkistan,Q986665
+ireland,Q1140152
+irish republic,Q1140152
+katanga,Q1148907
+state of katanga,Q1148907
+dji,Q977
+republic of djibouti,Q977
+dj,Q977
+jabuuti,Q977
+jbt,Q977
+gabuuti,Q977
+djibouti,Q977
+,Q977
+,Q983
+geq,Q983
+gq,Q983
+equatorial guinea,Q983
+republic of equatorial guinea,Q983
+portugal,Q45
+,Q45
+portuguese republic,Q45
+pt,Q45
+civ,Q1008
+republic of ivory coast,Q1008
+cte d'ivorie,Q1008
+cote d'lvoire,Q1008
+rpublique de cte d'ivoire,Q1008
+ivory coast,Q1008
+cote divoire,Q1008
+cote-d'ivoire,Q1008
+republic of the ivory coast,Q1008
+the ivory coast,Q1008
+cote divoire,Q1008
+,Q1008
+cote d' ivoire,Q1008
+republic of cte d'ivoire,Q1008
+cote ivoire,Q1008
+cte d'ivoire,Q1008
+cte-d'ivoire,Q1008
+cte divoire,Q1008
+cote divoire,Q1008
+republic of cote d'ivoire,Q1008
+ci,Q1008
+cote d ivoire,Q1008
+cte divoire,Q1008
+cte divoire,Q1008
+cote d'ivoire,Q1008
+cote d'ivore,Q1008
+prc,Q148
+communist china,Q148
+china,Q148
+people's republic of china,Q148
+,Q148
+pr china,Q148
+chn,Q148
+cn,Q148
+,Q1011
+cabo verde,Q1011
+cv,Q1011
+cape verde,Q1011
+republic of cape verde,Q1011
+cpv,Q1011
+cameroon,Q1009
+cam,Q1009
+cmr,Q1009
+cm,Q1009
+republic of cameroon,Q1009
+,Q1009
+orange free state,Q218023
+oranje-vrystaat,Q218023
+oranje-vrijstaat,Q218023
+cisdniestria,Q907112
+transnistria,Q907112
+nistrenia,Q907112
+pridnestrovian moldavian republic,Q907112
+pridnestria,Q907112
+transdniestria,Q907112
+republic of pridnestrovie,Q907112
+pridnestrovie,Q907112
+left bank of dniester,Q907112
+pridnestrovia,Q907112
+moldavian republic of transdniestria,Q907112
+nistria,Q907112
+trans-dniestr,Q907112
+transdniester,Q907112
+dnestr republic,Q907112
+pmr,Q907112
+transdniestrian moldavian republic,Q907112
+,Q1014
+republic of liberia,Q1014
+lbr,Q1014
+lr,Q1014
+liberia,Q1014
+,Q1013
+les,Q1013
+lesotho,Q1013
+kingdom of lesotho,Q1013
+ls,Q1013
+union des comores,Q970
+juzur al-qamar,Q970
+comoros,Q970
+com,Q970
+massiwa ya komori,Q970
+udzima wa komori,Q970
+union of the comoros,Q970
+km,Q970
+juzur al-qumur,Q970
+ouvoimoja wakomori,Q970
+,Q970
+al-ittid al-qumur,Q970
+cgo,Q971
+congo (brazzaville),Q971
+republique du congo,Q971
+rpublique du congo,Q971
+congo-brazzaville,Q971
+,Q971
+cg,Q971
+rep. congo,Q971
+congo republic,Q971
+republic of congo,Q971
+republic of the congo,Q971
+republic of mali,Q912
+,Q912
+mali,Q912
+ml,Q912
+mli,Q912
+ngola,Q916
+angola,Q916
+republic of angola,Q916
+,Q916
+ang,Q916
+ao,Q916
+republic of ghana,Q117
+gh,Q117
+ghana,Q117
+,Q117
+gha,Q117
+belorussia,Q184
+belarus,Q184
+byelorussia,Q184
+white ruthenia,Q184
+white russia,Q184
+byeloruss,Q184
+bielorussia,Q184
+by,Q184
+,Q184
+republic of belarus,Q184
+blr,Q184
+estonia,Q191
+republic of estonia,Q191
+,Q191
+est,Q191
+estland,Q191
+ee,Q191
+eesti,Q191
+is,Q189
+iceland,Q189
+republic of iceland,Q189
+isl,Q189
+island,Q189
+,Q189
+,Q222
+shqipris,Q222
+republic of albania,Q222
+republika e shqipris,Q222
+alb,Q222
+al,Q222
+albania,Q222
+republic of croatia,Q224
+croatia,Q224
+cro,Q224
+,Q224
+hr,Q224
+hrv,Q224
+,Q1027
+mauritius,Q1027
+mu,Q1027
+moris,Q1027
+mri,Q1027
+republic of mauritius,Q1027
+maurice,Q1027
+muritanya,Q1025
+moritani,Q1025
+,Q1025
+mr,Q1025
+agawej,Q1025
+mtn,Q1025
+murutaane,Q1025
+mauritania,Q1025
+gnnaar,Q1025
+gannaar,Q1025
+islamic republic of mauritania,Q1025
+russia,Q159
+rossija,Q159
+rossiya,Q159
+ru,Q159
+rossijskaja federatsija,Q159
+rossiyskaya federatsiya,Q159
+russian federation,Q159
+rus,Q159
+,Q1019
+madagascar,Q1019
+republic of madagascar,Q1019
+mg,Q1019
+mad,Q1019
+,Q1016
+state of libya,Q1016
+libya,Q1016
+lba,Q1016
+ly,Q1016
+,Q1020
+malawi,Q1020
+mw,Q1020
+maw,Q1020
+republic of malawi,Q1020
+supreme council of the floridas,Q6106050
+republic of the floridas,Q6106050
+republic of west florida,Q13258120
+west florida,Q13258120
+people's republic of donetsk,Q16150196
+donetsk people's republic,Q16150196
+luhansk people's republic,Q16746854
+lugansk people's republic,Q16746854
+new russia,Q16912926
+union of people's republics,Q16912926
+novorossiya,Q16912926
+novorussia,Q16912926
+federal state of novorussia,Q16912926
+federal state of novorossiya,Q16912926
+novorossiya (union of people's republics),Q16912926
+federal state of new russia,Q16912926
+republic of logone,Q23906811
+republic of dar el kuti,Q23906811
+dar el kuti,Q23906811
+repblica catalana,Q42346198
+catalan republic,Q42346198
+frg,Q183
+deutschland,Q183
+federal republic of germany,Q183
+germany,Q183
+bundesrepublik deutschland,Q183
+ger,Q183
+brd,Q183
+br deutschland,Q183
+de,Q183
+,Q1246
+kosovo,Q1246
+kos,Q1246
+xk,Q1246
+xkx,Q1246
+kv,Q1246
+republic of kosovo,Q1246
+hongkong,Q8646
+hksar,Q8646
+hong kong sar,Q8646
+china hong kong,Q8646
+hkg,Q8646
+hk,Q8646
+hong kong,Q8646
+hong kong sar; china,Q8646
+hong kong; china,Q8646
+,Q8646
+hong kong special administrative region,Q8646
+ad,Q228
+andorra,Q228
+principality of andorra,Q228
+and,Q228
+,Q228
+principality of the valleys of andorra,Q228
+cy,Q229
+greek cypriot state,Q229
+republic of cyprus,Q229
+,Q229
+cyprus,Q229
+slo,Q215
+republic of slovenia,Q215
+republika slovenija,Q215
+si,Q215
+slovenija,Q215
+slovenia,Q215
+svn,Q215
+,Q215
+macedonia,Q221
+former yugoslav republic of macedonia,Q221
+north macedonia,Q221
+,Q221
+mkd,Q221
+fyrom,Q221
+fyr macedonia,Q221
+republic of macedonia,Q221
+mk,Q221
+republic of north macedonia,Q221
+bosnia & herzegovina,Q225
+bosnia-herzegovina,Q225
+,Q225
+b&h,Q225
+bosnia and herzegovina,Q225
+ba,Q225
+bosnia,Q225
+bih,Q225
+lva,Q211
+latvija,Q211
+lat,Q211
+latvia,Q211
+lv,Q211
+republic of latvia,Q211
+latvian republic,Q211
+,Q211
+kingdom of morocco,Q1028
+ma,Q1028
+lmarib,Q1028
+marocco,Q1028
+al-marib,Q1028
+arab maghreb,Q1028
+mar,Q1028
+maroc,Q1028
+,Q1028
+morocco,Q1028
+republic of mozambique,Q1029
+mz,Q1029
+mozambique,Q1029
+moz,Q1029
+moambique,Q1029
+,Q1029
+repblica de moambique,Q1029
+republic of azerbaijan,Q227
+aze,Q227
+azerbaijan,Q227
+,Q227
+az,Q227
+,Q967
+republic of burundi,Q967
+bdi,Q967
+republika y'uburundi,Q967
+gouvernement du burundi,Q967
+bi,Q967
+burundi,Q967
+bf,Q965
+burkina faso,Q965
+,Q965
+slovakia,Q214
+svk,Q214
+slovak republic,Q214
+sk,Q214
+,Q214
+turkish republic of northern cyprus,Q23681
+turkish cyprus,Q23681
+ncy,Q23681
+north cyprus,Q23681
+trnc,Q23681
+north cyprus turkish republic,Q23681
+republic of northern cyprus,Q23681
+turkish republic of north cyprus,Q23681
+turkish federative state of north cyprus,Q23681
+the turkish republic of northern cyprus,Q23681
+northern cyprus,Q23681
+turkish cypriot state,Q23681
+turkish republic of cyprus,Q23681
+turkish occupied cyprus,Q23681
+turkish cypriot constituent state,Q23681
+so tom og prncipe,Q1039
+stp,Q1039
+democratic republic of so tom and prncipe,Q1039
+so tom and prncipe,Q1039
+st,Q1039
+sao tome & principe,Q1039
+,Q1039
+sao tome and principe,Q1039
+senegal,Q1041
+,Q1041
+sen,Q1041
+sn,Q1041
+republic of senegal,Q1041
+republic of srpska,Q11196
+republika srpska,Q11196
+serb republic,Q11196
+macao special administrative region,Q14773
+macao,Q14773
+aomen,Q14773
+macau sar; china,Q14773
+macau special administrative region,Q14773
+mo,Q14773
+macao sar; china,Q14773
+macau sar,Q14773
+macau special administrative region of the people's republic of china,Q14773
+macao sar,Q14773
+macau,Q14773
+,Q14773
+macao special administrative region of the people's republic of china,Q14773
+rumania,Q218
+ro,Q218
+roumania,Q218
+romania,Q218
+,Q218
+romnia,Q218
+mda,Q217
+md,Q217
+republic of moldova,Q217
+moldavia,Q217
+,Q217
+republica moldova,Q217
+moldova,Q217
+ua,Q212
+,Q212
+ukrainia,Q212
+ukraine,Q212
+ukr,Q212
+r,Q213
+cz,Q213
+,Q213
+cze,Q213
+czechia,Q213
+czr,Q213
+czech republic,Q213
+esko,Q213
+esk republika,Q213
+monaco,Q235
+mon,Q235
+mc,Q235
+fort-hercule,Q235
+monaco (rattache au district de menton en 1793),Q235
+,Q235
+principality of monaco,Q235
+montenegro,Q236
+me,Q236
+mne,Q236
+,Q236
+vat,Q237
+va,Q237
+,Q237
+stato della citt del vaticano,Q237
+vatican city,Q237
+vatican,Q237
+papal state,Q237
+vatican city state,Q237
+status civitatis vaticanae,Q237
+the vatican,Q237
+citt del vaticano,Q237
+civitas vaticana,Q237
+state of vatican city,Q237
+namibia,Q1030
+,Q1030
+na,Q1030
+republic of namibia,Q1030
+nam,Q1030
+republic of the niger,Q1032
+ne,Q1032
+republic of niger,Q1032
+,Q1032
+republic niger,Q1032
+niger,Q1032
+the niger,Q1032
+geo,Q230
+,Q230
+georgia,Q230
+ge,Q230
+republic of georgia,Q230
+georgia (country),Q230
+kazakhstan,Q232
+kaz,Q232
+republic of kazakhstan,Q232
+kz,Q232
+,Q232
+qazaqstan,Q232
+sm,Q238
+,Q238
+smr,Q238
+most serene republic of san marino,Q238
+san marino,Q238
+bar,Q244
+bb,Q244
+,Q244
+barbados,Q244
+indonesia,Q252
+republic of indonesia,Q252
+,Q252
+idn,Q252
+ina,Q252
+id,Q252
+,Q233
+mt,Q233
+malta,Q233
+mlt,Q233
+republic of malta,Q233
+umbuso weswatini,Q1050
+kingdom of eswatini,Q1050
+eswatini,Q1050
+sz,Q1050
+swz,Q1050
+,Q1050
+swaziland,Q1050
+kingdom of swaziland,Q1050
+bul,Q219
+bulgaria,Q219
+bg,Q219
+bgr,Q219
+,Q219
+republic of bulgaria,Q219
+s ossetia,Q23427
+samachablo,Q23427
+the state of alania,Q23427
+republic of south ossetia,Q23427
+s. ossetia,Q23427
+state of alania,Q23427
+tskhinvali region,Q23427
+south ossetian republic,Q23427
+south ossettia,Q23427
+south ossetia,Q23427
+south osetia,Q23427
+alania,Q23427
+south ossetian,Q23427
+republic of south ossetia  the state of alania,Q23427
+so,Q1045
+,Q1045
+som,Q1045
+federal republic of somalia,Q1045
+somalia,Q1045
+republic of sudan,Q1049
+the sudan,Q1049
+sd,Q1049
+republic of the sudan,Q1049
+north sudan,Q1049
+as-sdn,Q1049
+,Q1049
+sud,Q1049
+sudan,Q1049
+ngr,Q1033
+ng,Q1033
+nigeria,Q1033
+federal republic of nigeria,Q1033
+nga,Q1033
+,Q1033
+frn,Q1033
+naija,Q1033
+,Q1036
+uganda,Q1036
+uga,Q1036
+ug,Q1036
+republic of uganda,Q1036
+rwanda,Q1037
+rw,Q1037
+republic of rwanda,Q1037
+,Q1037
+netherlands,Q29999
+kingdom of the netherlands,Q29999
+the netherlands,Q29999
+,Q29999
+nl,Q29999
+sc,Q1042
+seychelles,Q1042
+sey,Q1042
+,Q1042
+republic of seychelles,Q1042
+sle,Q1044
+sierra leone,Q1044
+republic of sierra leone,Q1044
+,Q1044
+sl,Q1044
+northern somalia,Q34754
+somaliland,Q34754
+republic of somaliland,Q34754
+,Q40362
+sahrawi arab democratic republic,Q40362
+saharawi arab democratic republic,Q40362
+saharaui arab democratic republic,Q40362
+sadr,Q40362
+bz,Q242
+,Q242
+belize,Q242
+cub,Q241
+cuba,Q241
+cu,Q241
+,Q241
+republic of cuba,Q241
+munich council republic,Q58738
+bavarian soviet republic,Q58738
+munich soviet republic,Q58738
+bavarian council republic,Q58738
+corsican republic,Q71234
+banat republic,Q156513
+biafra,Q178469
+chechen republic of ichkeria,Q210036
+republic of serbian krajina,Q211853
+tamil eelam,Q242036
+labin republic,Q266657
+transcaucasian democratic federative republic,Q330756
+united baltic duchy,Q376778
+transkei,Q466551
+sixth republic of south korea,Q488889
+tswanaland,Q664980
+state of slovenes; croats and serbs,Q718374
+turkish federated state of cyprus,Q784851
+belarusian people's republic,Q842199
+people's republic of kampuchea,Q867778
+bushmanland,Q1017396
+roman republic,Q1072140
+damaraland,Q1158213
+ovamboland,Q1501001
+hereroland,Q1609800
+east caprivi,Q1660773
+kavangoland,Q1737252
+finnish socialist workers' republic,Q1811029
+namaland,Q1964139
+republic of kosova,Q2631403
+italian partisan republics,Q3456497
+inner mongolian people's republic,Q4120908
+republic of galicia,Q7314468
+hungarian republic,Q16985296
+hungarian state,Q18331029
+free dadra and nagar haveli,Q86750256

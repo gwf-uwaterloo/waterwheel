@@ -9,15 +9,33 @@ subquery = """
 SELECT ?item ?itemLabel ?altLabel
 WHERE 
 {
-  ?item wdt:P31 wd:Q6256.
+  ?item p:P31/ps:P31/wdt:P279* wd:Q6256.
   OPTIONAL { ?item skos:altLabel ?altLabel . FILTER (lang(?altLabel) = "en") }
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+  FILTER (CONTAINS(STR(?item), 
+"""
+subquery = """
+SELECT ?item ?itemLabel ?altLabel
+WHERE 
+{
+    {?item wdt:P31 wd:Q3624078} 
+    UNION
+    {?item wdt:P31 wd:Q15634554}
+    UNION
+    {{?item wdt:P31 wd:Q779415}}
+    UNION
+    {{?item wdt:P31 wd:Q779415}}
+    ?article schema:about ?item .
+    ?article schema:isPartOf <https://en.wikipedia.org/>.
+    OPTIONAL {?item skos:altLabel ?altLabel . FILTER (lang(?altLabel) = "en") }
+    SERVICE wikibase:label {bd:serviceParam wikibase:language "en"}
   FILTER (CONTAINS(STR(?item), 
 """
 combinations = [f"Q{n}" for n in range(10, 100)]
 waterbodies = {}
 not_done = []
-combinations = [f"Q{sys.argv[1]}"]
+#combinations = [f"Q{sys.argv[1]}"]
+combinations = ["Q"]
 for comb in tqdm(combinations):
     query = subquery + f"'{comb}'))" + "} GROUP BY ?item ?itemLabel ?altLabel"
     try:
@@ -38,7 +56,6 @@ for comb in tqdm(combinations):
                     waterbodies[key] = set()
                 waterbodies[key].add(alias.lower())
     except Exception as e:
-        raise(e)
         print (str(e))
         print (comb)
         not_done.append(comb)
@@ -51,8 +68,7 @@ for key, names in waterbodies.items():
 print ("length of waterbodies", len(pairs))
 
 try:
-    #csv = "Name,ID\n"
-    csv = ""
+    csv = "Name,ID\n"
     for key, name in pairs:
         csv += f"{name.replace(',', ';')},{key.replace(',', ';')}\n"
 
