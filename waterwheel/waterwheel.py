@@ -44,9 +44,9 @@ class WaterWheel(EntityRuler):
         # this is used to set priority.
         self._pq = {
             label: iter for iter, label in enumerate([
-                'OCEAN', 'CANADIAN_PROVINCE', 'RIVER', 
-                'LAKE', 'DRAINAGEBASIN', 'WATERCOURSE', 
-                'WATER_BODY'
+                'OCEAN', 'COUNTRY', 'CANADIAN_PROVINCE', 'RIVER',
+                'US_STATE', 'LAKE', 'MOUNTAIN', 'DRAINAGEBASIN', 
+                'WATERCOURSE', 'WATER_BODY'
         ])}
         self.from_disk(DOC_BIN_FILE)
         Span.set_extension('wikilink', default=None, force=True)
@@ -91,10 +91,11 @@ class WaterWheel(EntityRuler):
             if not (q_before or q_after):
                 # skip unqualified/improper/stop_words
                 # unless it is province abbreviation
-                if label == 'CANADIAN_PROVINCE':
+                if label in ['US_STATE', 'CANADIAN_PROVINCE']:
                     # all abbreviations are 4 chars or less.
-                    if is_all_caps and len(match_str) < 5:
-                        pass
+                    if len(match_str) < 5:
+                        if not is_all_caps:
+                            continue
                     elif is_stop_word or is_improper_noun:
                         continue
                 elif is_stop_word or is_improper_noun:
@@ -308,6 +309,7 @@ class WaterWheel(EntityRuler):
             for hash, label in vocab.items():
                 self._ent_ids[int(hash)] = label
                 self._qualifiers[label] = [label.lower(), label.lower()+'s']
+            self._qualifiers['MOUNTAIN'].extend(['mount', 'mounts', 'mt.'])
             self._stop_words = cfg.get('stop_words', [])
             self._stop_words = set(self._stop_words)
             self._wikidata = cfg.get('wikidata', {})

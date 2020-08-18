@@ -19,7 +19,7 @@ class TestWaterWheel(unittest.TestCase):
         doc = self.nlp(text)
         self.assertEqual(len(doc.ents), 0)
 
-        text = 'The Amazon, Arctic, Ontario are something.'
+        text = 'The Amazon, Arctic, Ontario, California, Canada, Mt. Everest are something.'
         doc = self.nlp(text)
         self.assertEqual(str(doc.ents[0]), 'Amazon')
         self.assertEqual(str(doc.ents[0].label_), 'RIVER')
@@ -27,6 +27,12 @@ class TestWaterWheel(unittest.TestCase):
         self.assertEqual(str(doc.ents[1].label_), 'OCEAN')
         self.assertEqual(str(doc.ents[2]), 'Ontario')
         self.assertEqual(str(doc.ents[2].label_), 'CANADIAN_PROVINCE')
+        self.assertEqual(str(doc.ents[3]), 'California')
+        self.assertEqual(str(doc.ents[3].label_), 'US_STATE')
+        self.assertEqual(str(doc.ents[4]), 'Canada')
+        self.assertEqual(str(doc.ents[4].label_), 'COUNTRY')
+        self.assertEqual(str(doc.ents[5]), 'Mt. Everest')
+        self.assertEqual(str(doc.ents[5].label_), 'MOUNTAIN')
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
 
@@ -57,6 +63,7 @@ class TestWaterWheel(unittest.TestCase):
         for Mississippi/Missouri Rivers,
         Mackenzie and Nelson-Churchill River Basins;
         Arctic-Indian Oceans and Ontario-Alberta provinces.
+        Calbuco-Jagerhorn mountains.
         '''
         doc = self.nlp(text)
 
@@ -78,6 +85,10 @@ class TestWaterWheel(unittest.TestCase):
         self.assertEqual(str(doc.ents[7].label_), 'CANADIAN_PROVINCE')
         self.assertEqual(str(doc.ents[8]), 'Alberta')
         self.assertEqual(str(doc.ents[8].label_), 'CANADIAN_PROVINCE')
+        self.assertEqual(str(doc.ents[9]), 'Calbuco')
+        self.assertEqual(str(doc.ents[9].label_), 'MOUNTAIN')
+        self.assertEqual(str(doc.ents[10]), 'Jagerhorn mountains')
+        self.assertEqual(str(doc.ents[10].label_), 'MOUNTAIN')
 
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
@@ -88,6 +99,7 @@ class TestWaterWheel(unittest.TestCase):
         Lakes Ontario and Erie were created, along with what would become
          the Saint Lawrence River. And the Mississippi and Missouri Rivers.
          Arctic and Indian Oceans and Ontario and Alberta provinces.
+         Calbuco-Jagerhorn mountains.
         '''
         doc = self.nlp(text)
 
@@ -111,18 +123,22 @@ class TestWaterWheel(unittest.TestCase):
         self.assertEqual(str(doc.ents[8].label_), 'CANADIAN_PROVINCE')
         self.assertEqual(str(doc.ents[9]), 'Alberta')
         self.assertEqual(str(doc.ents[9].label_), 'CANADIAN_PROVINCE')
+        self.assertEqual(str(doc.ents[10]), 'Calbuco')
+        self.assertEqual(str(doc.ents[10].label_), 'MOUNTAIN')
+        self.assertEqual(str(doc.ents[11]), 'Jagerhorn mountains')
+        self.assertEqual(str(doc.ents[11].label_), 'MOUNTAIN')
 
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
 
     def test_qualifier_effect(self):
-        text = 'Is Mississippi a river or a lake?'
+        text = 'Is Mississippi a river or a lake or a state?'
         doc = self.nlp(text)
         self.assertEqual(str(doc.ents[0]), 'Mississippi')
         self.assertEqual(str(doc.ents[0].label_), 'RIVER')
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
-        text = 'Is Mississippi Lake a river or a lake?'
+        text = 'Is Mississippi Lake a river or a lake or a state?'
         doc = self.nlp(text)
         self.assertEqual(str(doc.ents[0]), 'Mississippi Lake')
         self.assertEqual(str(doc.ents[0].label_), 'LAKE')
@@ -154,6 +170,20 @@ class TestWaterWheel(unittest.TestCase):
         doc = self.nlp(text)
         self.assertEqual(str(doc.ents[0]), 'Arctic lake')
         self.assertEqual(str(doc.ents[0].label_), 'LAKE')
+        for ent in doc.ents:
+            self.assertIsNotNone(ent._.wikilink)
+        
+        text = 'Is Everest a lake or a mountain?'
+        doc = self.nlp(text)
+        self.assertEqual(str(doc.ents[0]), 'Everest')
+        self.assertEqual(str(doc.ents[0].label_), 'LAKE')
+        for ent in doc.ents:
+            self.assertIsNotNone(ent._.wikilink)
+        
+        text = 'Is Mt. Everest a lake or a mountain?'
+        doc = self.nlp(text)
+        self.assertEqual(str(doc.ents[0]), 'Mt. Everest')
+        self.assertEqual(str(doc.ents[0].label_), 'MOUNTAIN')
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
 
@@ -202,11 +232,13 @@ class TestWaterWheel(unittest.TestCase):
             self.assertIsNotNone(ent._.wikilink)
     
     def test_province_abbreviations(self):
-        doc = self.nlp('My address is something, something, on or On or oN.')
+        doc = self.nlp('My address is something, something, ab or Ab or aB or ny or Ny or nY.')
         self.assertEqual(len(doc.ents), 0)
-        doc = self.nlp('Some address is university avenue, ON, canada.')
-        self.assertEqual(str(doc.ents[0]), 'ON')
+        doc = self.nlp('Some address is university avenue, AB, canada or NY, usa.')
+        self.assertEqual(str(doc.ents[0]), 'AB')
         self.assertEqual(str(doc.ents[0].label_), 'CANADIAN_PROVINCE')
+        self.assertEqual(str(doc.ents[1]), 'NY')
+        self.assertEqual(str(doc.ents[1].label_), 'US_STATE')
 
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
