@@ -70,6 +70,7 @@ class WaterWheel(EntityRuler):
         matches = list(self.phrase_matcher(doc))
         matches = sorted([(start, end, self._ent_ids[m_id]) for m_id, start, end in matches if start != end])
         match_dicts = []
+
         # stick together qualifiers with matcher wherever possible.
         for start, end, label in matches:
             if any(t.ent_type for t in doc[start:end]) and not self.overwrite:
@@ -98,6 +99,9 @@ class WaterWheel(EntityRuler):
                             continue
                     elif is_stop_word or is_improper_noun:
                         continue
+                    #quick filter to filter out CT Scan to avoid ambiguity
+                    if (match_str == 'CT' and str(doc[end:end+1]).lower() == 'scan'):
+                        continue
                 elif is_stop_word or is_improper_noun:
                     continue
             match_dicts.append({
@@ -122,6 +126,7 @@ class WaterWheel(EntityRuler):
                 current_range = set(range(match['start'], match['end']))
                 match_groups.append([])
             match_groups[-1].append(match)
+
         # filter out best matches in each group.
         final_matches = self._filter_matches(match_groups)
         # set wikilinks to final matches.
