@@ -98,6 +98,9 @@ class WaterWheel(EntityRuler):
                             continue
                     elif is_stop_word or is_improper_noun:
                         continue
+                    #quick filter to filter out CT Scan to avoid ambiguity
+                    if (match_str == 'CT' and str(doc[end:end+1]).lower() == 'scan'):
+                        continue
                 elif is_stop_word or is_improper_noun:
                     continue
             match_dicts.append({

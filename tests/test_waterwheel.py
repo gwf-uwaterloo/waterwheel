@@ -247,5 +247,14 @@ class TestWaterWheel(unittest.TestCase):
         doc = self.nlp('There is no waterbody in this (), ( ) sentence.')
         self.assertEqual(len(doc.ents), 0)
 
+    def test_issue34(self):
+        doc = self.nlp('Patients should have had a CT scan showing bilateral infiltrates.')
+        self.assertEqual(len(doc.ents), 0)
+        doc = self.nlp('CT should be recognized as a state.')
+        self.assertEqual(str(doc.ents[0]), 'CT')
+        self.assertEqual(str(doc.ents[0].label_), 'US_STATE')
+        for ent in doc.ents:
+            self.assertIsNotNone(ent._.wikilink)
+
 if __name__ == '__main__':
     unittest.main()
