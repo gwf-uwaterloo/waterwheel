@@ -21,7 +21,7 @@ class WaterWheel(EntityRuler):
 
     name = 'waterwheel'
 
-    def __init__(self, nlp: Language, overwrite_ents: bool = True):
+    def __init__(self, nlp: Language, overwrite_ents: bool = True, disable_abbreviations: bool = False):
         """Initialize the class.
         
         Parameters
@@ -33,8 +33,12 @@ class WaterWheel(EntityRuler):
             If True then doc.ents from preceeding pipeline components
             are removed/overwritten. Otherwise, previous doc.ents are kept
             intact.
+        disable_abbreviations : bool, optional
+            If True then all abbreviations of US_STATES of CANADIAN_PROVINCES
+            will be ignored.
         """
         super().__init__(nlp, phrase_matcher_attr='LOWER', overwrite_ents=overwrite_ents)
+        self._disable_abbreviations = disable_abbreviations
         self._ent_ids = defaultdict(lambda: "WATER_BODY")
         self._stop_words = set()
         self._wikidata = {}
@@ -102,6 +106,9 @@ class WaterWheel(EntityRuler):
                     if (match_str == 'CT' and str(doc[end:end+1]).lower() == 'scan'):
                         continue
                 elif is_stop_word or is_improper_noun:
+                    continue
+            if self._disable_abbreviations:
+                if label in ['US_STATE', 'CANADIAN_PROVINCE'] and len(match_str) < 5:
                     continue
             match_dicts.append({
                 'match_str': match_str,
