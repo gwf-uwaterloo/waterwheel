@@ -9,6 +9,11 @@ class TestWaterWheel(unittest.TestCase):
         self.ww = WaterWheel(self.nlp)
         self.nlp.add_pipe(self.ww)
 
+        # for testing disable_abbreviations
+        self.nlp2 = spacy.load('en_core_web_sm')
+        self.ww2 = WaterWheel(self.nlp2, disable_abbreviations=True)
+        self.nlp2.add_pipe(self.ww2)
+
     def test_pipeline_added(self):
         self.assertEqual(self.nlp.pipe_names[-1], 'waterwheel')
 
@@ -250,6 +255,10 @@ class TestWaterWheel(unittest.TestCase):
 
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
+
+        # testing disable_abbreviations
+        doc = self.nlp2('Some address is university avenue, AB, canada or NY, usa.')
+        self.assertEqual(len(doc.ents), 0)
     
     def test_nonalphabetical_matches(self):
         doc = self.nlp('There is no waterbody in this (), ( ) sentence.')
