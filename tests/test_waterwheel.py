@@ -19,7 +19,7 @@ class TestWaterWheel(unittest.TestCase):
         doc = self.nlp(text)
         self.assertEqual(len(doc.ents), 0)
 
-        text = 'The Amazon, Arctic, Ontario, California, Canada, Mt. Everest are something.'
+        text = 'The Amazon, Arctic, Ontario, California, Canada, Mt. Everest , Zhejiang, Chongqing are something.'
         doc = self.nlp(text)
         self.assertEqual(str(doc.ents[0]), 'Amazon')
         self.assertEqual(str(doc.ents[0].label_), 'RIVER')
@@ -33,6 +33,10 @@ class TestWaterWheel(unittest.TestCase):
         self.assertEqual(str(doc.ents[4].label_), 'COUNTRY')
         self.assertEqual(str(doc.ents[5]), 'Mt. Everest')
         self.assertEqual(str(doc.ents[5].label_), 'MOUNTAIN')
+        self.assertEqual(str(doc.ents[6]), 'Zhejiang')
+        self.assertEqual(str(doc.ents[6].label_), 'CHINESE_PROVINCE')
+        self.assertEqual(str(doc.ents[7]), 'Chongqing')
+        self.assertEqual(str(doc.ents[7].label_), 'CHINESE_PROVINCE')
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
 
@@ -99,7 +103,7 @@ class TestWaterWheel(unittest.TestCase):
         Lakes Ontario and Erie were created, along with what would become
          the Saint Lawrence River. And the Mississippi and Missouri Rivers.
          Arctic and Indian Oceans and Ontario and Alberta provinces.
-         Calbuco-Jagerhorn mountains.
+         Calbuco-Jagerhorn mountains. Shandong and Shanghai are provinces.
         '''
         doc = self.nlp(text)
 
@@ -127,6 +131,10 @@ class TestWaterWheel(unittest.TestCase):
         self.assertEqual(str(doc.ents[10].label_), 'MOUNTAIN')
         self.assertEqual(str(doc.ents[11]), 'Jagerhorn mountains')
         self.assertEqual(str(doc.ents[11].label_), 'MOUNTAIN')
+        self.assertEqual(str(doc.ents[12]), 'Shandong')
+        self.assertEqual(str(doc.ents[12].label_), 'CHINESE_PROVINCE')
+        self.assertEqual(str(doc.ents[13]), 'Shanghai')
+        self.assertEqual(str(doc.ents[13].label_), 'CHINESE_PROVINCE')
 
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)

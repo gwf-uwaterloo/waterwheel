@@ -46,7 +46,7 @@ class WaterWheel(EntityRuler):
             label: iter for iter, label in enumerate([
                 'OCEAN', 'COUNTRY', 'CANADIAN_PROVINCE', 'RIVER',
                 'US_STATE', 'LAKE', 'MOUNTAIN', 'DRAINAGEBASIN', 
-                'WATERCOURSE', 'WATER_BODY'
+                'WATERCOURSE', 'WATER_BODY', 'CHINESE_PROVINCE'
         ])}
         self.from_disk(DOC_BIN_FILE)
         Span.set_extension('wikilink', default=None, force=True)
