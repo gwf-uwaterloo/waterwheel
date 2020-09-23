@@ -10,7 +10,7 @@ requires = [
 ]
 setup(
     name="waterwheel",
-    version="0.3.0",
+    version="0.4.0",
     author="Govind Sharma",
     author_email="govind.sharma@uwaterloo.ca",
     description="Spacy Pipeline Component for Hydrologic Entity Extraction",

@@ -273,5 +273,21 @@ class TestWaterWheel(unittest.TestCase):
         for ent in doc.ents:
             self.assertIsNotNone(ent._.wikilink)
 
+    def test_issue40(self):
+        doc = self.nlp('The University of Waterloo is in Kitchener. Kitchener has a lot of parks and watershed')
+        self.assertEqual(len(doc.ents), 0)
+        doc = self.nlp('The University Lake and the Watershed Lake should be recognized.')
+        self.assertEqual(str(doc.ents[0]), 'University Lake')
+        self.assertEqual(str(doc.ents[0].label_), 'LAKE')
+        self.assertEqual(str(doc.ents[1]), 'Watershed Lake')
+        self.assertEqual(str(doc.ents[1].label_), 'LAKE')
+        doc = self.nlp('August and January should be recognized.')
+        self.assertEqual(len(doc.ents), 0)
+        doc = self.nlp('The August Lake and the January Lake should be recognized.')
+        self.assertEqual(str(doc.ents[0]), 'August Lake')
+        self.assertEqual(str(doc.ents[0].label_), 'LAKE')
+        self.assertEqual(str(doc.ents[1]), 'January Lake')
+        self.assertEqual(str(doc.ents[1].label_), 'LAKE')
+
 if __name__ == '__main__':
     unittest.main()
